@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Joy D'Souza</title>
+  <meta name="description" content="Engineering projects by Joy D'Souza.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">JOY <span>D'SOUZA</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="section" style="border-top:none; padding-bottom: 0;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Selected Work</span>
+        <h2>Projects</h2>
+        <p style="color:var(--offwhite-dim); margin-top:14px;">
+          A few things I've designed, tested, and built — from a medical robotics club
+          to a class competition robot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECT ENTRIES
+       Each project is one .project-entry block. To add a new project, copy a
+       whole block (including the closing </div>) and edit the content inside.
+       Add class="reverse" to a block to flip image/text sides for variety.
+       Swap the <img> for a <video controls> tag to embed a video instead.
+       ========================================================================== -->
+  <div class="container">
+
+    <!-- PROJECT 1 -->
+    <div class="project-entry">
+      <div class="project-media bracket-frame">
+        <span class="bracket-tl"></span><span class="bracket-br"></span>
+        <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
+        <!-- To embed a video instead of an image, replace the <img> above with:
+        <video controls poster="assets/img/project-force-sensor.svg">
+          <source src="assets/videos/force-sensor-demo.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="project-copy">
+        <div class="project-number">01</div>
+        <h3>Force Sensor for 3D-Printed Prosthetic</h3>
+        <div class="project-org">Medical Robotics Club · Atlanta, GA · Sep 2025 – Present</div>
+        <ul>
+          <li>Developing a Force Sensing Resistor (FSR) calibration SOP to standardize sensor variability for integration into a low-cost 3D-printed prosthetic for trans-radial amputees.</li>
+          <li>Calibrating FSRs using known weights and Arduino-collected voltage data to analytically define soft/medium/hard touch thresholds as prosthetic feedback.</li>
+          <li>Designed a 3D-printed force distributor to evenly concentrate applied loads on the sensing surface for repeatable calibration testing.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Arduino</span>
+          <span class="tag">Sensor Calibration</span>
+          <span class="tag">3D Printing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-entry reverse">
+      <div class="project-media bracket-frame">
+        <span class="bracket-tl"></span><span class="bracket-br"></span>
+        <img src="assets/img/project-menstrual-pad.svg" alt="Material absorbance testing for a sustainable menstrual pad">
+      </div>
+      <div class="project-copy">
+        <div class="project-number">02</div>
+        <h3>Sustainable Menstrual Pad</h3>
+        <div class="project-org">GT Engineers Without Borders — Wish For WASH · Atlanta, GA · Oct 2024 – Present</div>
+        <ul>
+          <li>Collaborating with a 14-member bioplastics team to develop an adhesive-free, sustainable menstrual pad matching the absorbency, comfort, and cost of commercial pads.</li>
+          <li>Conducted single-material absorbance testing on 9 materials per ASTM and ISO standards using water and gelatin blood simulant — identifying Himalayan nettle and wood pulp as top-performing core materials.</li>
+          <li>Progressing to composite and rewet testing across pad layers for absorbency, permeability, and skin comfort.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Materials Testing</span>
+          <span class="tag">ASTM / ISO Standards</span>
+          <span class="tag">Sustainability</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-entry">
+      <div class="project-media bracket-frame">
+        <span class="bracket-tl"></span><span class="bracket-br"></span>
+        <img src="assets/img/project-autonomous-robot.svg" alt="Autonomous competition robot chassis schematic">
+      </div>
+      <div class="project-copy">
+        <div class="project-number">03</div>
+        <h3>Autonomous Competition Robot</h3>
+        <div class="project-org">ME2110 · Atlanta, GA · Sep 2025 – Nov 2025</div>
+        <ul>
+          <li>Collaborated in a 4-member team to design and fabricate a fully autonomous robot in 8 weeks under a $120 budget, competing against 72 teams.</li>
+          <li>Used Onshape, Inkscape, and Bambu Studio for component fabrication on Trotec laser cutters and Bambu Lab P1S printers.</li>
+          <li>Created technical reports and presentations covering concept generation, quality function deployment, and design overview (Morphological Chart, Engineering Spec Sheet, House of Quality).</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Onshape</span>
+          <span class="tag">Arduino Uno</span>
+          <span class="tag">Laser Cutting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Joy D'Souza</p>
+      <div class="footer-links">
+        <a href="mailto:joythdsouza@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

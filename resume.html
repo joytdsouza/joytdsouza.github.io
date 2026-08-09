@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Joy D'Souza</title>
+  <meta name="description" content="Resume of Joy D'Souza, Mechanical Engineering student at Georgia Tech.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">JOY <span>D'SOUZA</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="section" style="border-top:none;">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:32px;">
+        <span class="eyebrow">Résumé</span>
+        <h2>Resume</h2>
+      </div>
+
+      <div class="resume-toolbar">
+        <p style="color:var(--offwhite-dim); font-size:0.95rem;">
+          Viewing may look different on mobile — use the download button if the embed doesn't load.
+        </p>
+        <!-- To update your resume: replace assets/resume.pdf with your new file (keep the same filename) -->
+        <a href="assets/resume.pdf" download class="btn btn-accent">Download PDF</a>
+      </div>
+
+      <div class="bracket-frame">
+        <span class="bracket-tl"></span><span class="bracket-br"></span>
+        <object data="assets/resume.pdf" type="application/pdf" class="resume-embed">
+          <div class="resume-fallback">
+            Your browser can't display the embedded PDF.
+            <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download Resume</a>
+          </div>
+        </object>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Joy D'Souza</p>
+      <div class="footer-links">
+        <a href="mailto:joythdsouza@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
