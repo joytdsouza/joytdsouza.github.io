@@ -8,7 +8,7 @@
 
   <!-- Fonts: swap or remove this link if you'd rather self-host fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -17,7 +17,7 @@
   <!-- ============================== NAVBAR ============================== -->
   <header class="navbar">
     <div class="container">
-      <a href="index.html" class="nav-logo">JOY <span>D'SOUZA</span></a>
+      <a href="index.html" class="nav-logo">Joy <span>D'Souza</span></a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -29,11 +29,10 @@
     </div>
   </header>
 
-  <!-- ============================== HERO ============================== -->
-  <!-- To use a real photo: replace assets/img/hero-bg.svg below with e.g. assets/img/hero-bg.jpg -->
+  <!-- ============================== HERO / ABOUT ============================== -->
   <section class="hero">
-    <img src="assets/img/hero-bg.svg" alt="" class="hero-bg">
-    <div class="hero-overlay"></div>
+    <!-- Decorative botanical line art — remove this <img> if you'd rather not have it -->
+    <img src="assets/img/hero-branch.svg" alt="" class="hero-branch">
     <div class="container">
       <div class="hero-content">
         <span class="hero-title">Mechanical Engineering · Georgia Tech</span>
@@ -49,6 +48,18 @@
           <a href="projects.html" class="btn btn-primary">View Projects</a>
           <a href="resume.html" class="btn btn-outline">View Resume</a>
         </div>
+
+        <!-- Contact links — edit the href values to update your email / LinkedIn -->
+        <div class="hero-contact">
+          <a href="mailto:joythdsouza@gmail.com" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+            joythdsouza@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/joytdsouza
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -63,7 +74,7 @@
 
       <!-- Add / edit entries by copying a .log-entry block -->
       <div class="log-entry">
-        <div class="log-date">JUN 2026 — PRESENT</div>
+        <div class="log-date">Jun 2026 — Present</div>
         <div class="log-role">
           <h3>Student Assistant</h3>
           <div class="log-org">Design for Planet Impact · Atlanta, GA</div>
@@ -72,7 +83,7 @@
       </div>
 
       <div class="log-entry">
-        <div class="log-date">MAY 2026 — JUL 2026</div>
+        <div class="log-date">May 2026 — Jul 2026</div>
         <div class="log-role">
           <h3>Product Test Engineering Intern</h3>
           <div class="log-org">SharkNinja · Needham, MA</div>
@@ -81,7 +92,7 @@
       </div>
 
       <div class="log-entry">
-        <div class="log-date">JAN 2026 — PRESENT</div>
+        <div class="log-date">Jan 2026 — Present</div>
         <div class="log-role">
           <h3>Undergraduate Researcher</h3>
           <div class="log-org">Georgia Tech · Atlanta, GA</div>
@@ -90,7 +101,7 @@
       </div>
 
       <div class="log-entry">
-        <div class="log-date">MAY 2025 — AUG 2025</div>
+        <div class="log-date">May 2025 — Aug 2025</div>
         <div class="log-role">
           <h3>Quality Engineering Intern</h3>
           <div class="log-org">SharkNinja · Needham, MA</div>
@@ -99,7 +110,7 @@
       </div>
 
       <div class="log-entry">
-        <div class="log-date">AUG 2022 — AUG 2024</div>
+        <div class="log-date">Aug 2022 — Aug 2024</div>
         <div class="log-role">
           <h3>Level 2 Instructor</h3>
           <div class="log-org">Mathnasium · Hanover, MA</div>
@@ -114,10 +125,6 @@
   <footer>
     <div class="container">
       <p>© 2026 Joy D'Souza</p>
-      <div class="footer-links">
-        <a href="mailto:joythdsouza@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
     </div>
   </footer>
 

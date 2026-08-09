@@ -7,7 +7,7 @@
   <meta name="description" content="Resume of Joy D'Souza, Mechanical Engineering student at Georgia Tech.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,7 +15,7 @@
 
   <header class="navbar">
     <div class="container">
-      <a href="index.html" class="nav-logo">JOY <span>D'SOUZA</span></a>
+      <a href="index.html" class="nav-logo">Joy <span>D'Souza</span></a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -35,18 +35,23 @@
       </div>
 
       <div class="resume-toolbar">
-        <p style="color:var(--offwhite-dim); font-size:0.95rem;">
-          Viewing may look different on mobile — use the download button if the embed doesn't load.
+        <p style="color:var(--navy-soft); font-size:0.95rem;">
+          Sized to fit the page width so it's readable without zooming — use the
+          button if the embed doesn't load on your browser.
         </p>
         <!-- To update your resume: replace assets/resume.pdf with your new file (keep the same filename) -->
         <a href="assets/resume.pdf" download class="btn btn-accent">Download PDF</a>
       </div>
 
-      <div class="bracket-frame">
-        <span class="bracket-tl"></span><span class="bracket-br"></span>
-        <object data="assets/resume.pdf" type="application/pdf" class="resume-embed">
+      <!-- The #view=FitH fragment tells the browser's built-in PDF viewer to open
+           fit-to-width instead of fit-to-page, so text is readable at a glance.
+           The wrapper is sized to a letter-page aspect ratio (8.5 x 11) so it never
+           looks squeezed on mobile. -->
+      <div class="resume-frame-wrap media-frame">
+        <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="resume-embed">
           <div class="resume-fallback">
             Your browser can't display the embedded PDF.
+            <br><br>
             <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download Resume</a>
           </div>
         </object>
@@ -58,10 +63,6 @@
   <footer>
     <div class="container">
       <p>© 2026 Joy D'Souza</p>
-      <div class="footer-links">
-        <a href="mailto:joythdsouza@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
     </div>
   </footer>
 

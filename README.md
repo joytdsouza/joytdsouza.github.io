@@ -1,24 +1,27 @@
 # Joy D'Souza — Engineering Portfolio
 
-A simple 3-page portfolio (About / Projects / Resume) built with plain HTML, CSS,
-and a small bit of JS — no build tools, frameworks, or dependencies. It's designed
-to be hosted for free on GitHub Pages.
+A simple portfolio (About / Projects / Resume + a detail page per project) built
+with plain HTML, CSS, and a small bit of JS — no build tools, frameworks, or
+dependencies. Designed to be hosted for free on GitHub Pages.
 
 ## File structure
 
 ```
 portfolio/
-├── index.html              About page (homepage)
-├── projects.html            Projects page
-├── resume.html               Resume page (embeds assets/resume.pdf)
+├── index.html                      About page (homepage)
+├── projects.html                    Projects page
+├── project-force-sensor.html         Detail page for Project 1
+├── project-menstrual-pad.html        Detail page for Project 2
+├── project-autonomous-robot.html     Detail page for Project 3
+├── resume.html                        Resume page (embeds assets/resume.pdf)
 ├── css/
-│   └── style.css             All styling — colors, fonts, layout
+│   └── style.css                       All styling — colors, fonts, layout
 ├── js/
-│   └── main.js                Mobile nav toggle + active-link highlighting
+│   └── main.js                          Mobile nav toggle + active-link highlighting
 ├── assets/
-│   ├── resume.pdf              Your resume — replace this file to update
-│   ├── img/                    Placeholder project + hero images (SVGs)
-│   └── videos/                 Put project video files here if you use them
+│   ├── resume.pdf                        Your resume — replace this file to update
+│   ├── img/                              Placeholder photos/illustrations (SVGs)
+│   └── videos/                           Put project video files here if you use them
 └── README.md
 ```
 
@@ -60,14 +63,26 @@ within a minute or two.
 Everything is plain HTML — open any `.html` file in a text editor (VS Code,
 GitHub's own web editor, etc.) and edit the text directly. A few common edits:
 
-- **Change your bio / hero text:** edit the `<div class="hero-content">` block
+- **Change your bio / intro text:** edit the `<div class="hero-content">` block
   in `index.html`.
+- **Update your email / LinkedIn:** in `index.html`, edit the two links inside
+  `<div class="hero-contact">` — change the `mailto:` address and the LinkedIn
+  URL, and update the visible text too.
 - **Add or edit a work experience entry:** in `index.html`, copy an entire
   `<div class="log-entry">...</div>` block and edit the dates/title/description.
-- **Add or edit a project:** in `projects.html`, copy an entire
+- **Add or edit a project card:** in `projects.html`, copy an entire
   `<div class="project-entry">...</div>` block (including the closing `</div>`)
-  and edit the content. Add `class="project-entry reverse"` to alternate which
-  side the image sits on.
+  and edit the content. Image stays on the left, text on the right, for every
+  entry — that's intentional and consistent across all projects.
+- **Add a project's detail page:** copy one of the existing
+  `project-*.html` files, rename it (e.g. `project-my-new-thing.html`), edit
+  the title/text/photos inside, then point a new project card's "Learn More"
+  button (in `projects.html`) at that filename.
+- **Fill in a project detail page:** each `project-*.html` file has a
+  `.gallery-grid` section with placeholder photos — swap the `src` on each
+  `<img>` for a real photo, and add more `<img>` tags (wrapped the same way,
+  in a `<div class="media-frame">`) for more photos. Add more `<p>` or `<li>`
+  tags inside `.detail-body` for more written detail.
 - **Swap a project image:** drop your image file into `assets/img/` and change
   the `src="..."` on the matching `<img>` tag. Keep images under ~500KB
   each (resize/compress before uploading) so the site stays fast.
@@ -83,12 +98,13 @@ GitHub's own web editor, etc.) and edit the text directly. A few common edits:
   instead so the video streams from YouTube rather than your repo.
 - **Update your resume:** replace `assets/resume.pdf` with your new PDF, keeping
   the exact filename `resume.pdf` (or update the `src`/`href` in `resume.html`
-  if you rename it).
+  if you rename it). The embed is sized to a standard page's proportions so it
+  stays readable on both desktop and mobile without the visitor needing to zoom.
 - **Change colors:** every color is defined once at the top of `css/style.css`
   inside `:root { ... }`. Change a hex value there and it updates everywhere.
 - **Change fonts:** the Google Fonts `<link>` tags are in the `<head>` of each
   HTML file, and the font names are set in `css/style.css` under
-  `--font-display`, `--font-body`, `--font-mono`.
+  `--font-display` (headings) and `--font-body` (everything else).
 
 ## 4. Notes on performance
 
