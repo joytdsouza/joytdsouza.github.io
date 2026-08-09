@@ -8,7 +8,7 @@ dependencies. Designed to be hosted for free on GitHub Pages.
 
 ```
 portfolio/
-├── index.html                      About page (homepage)
+├── index.html                      About page (homepage) — hero + Contact Me + Experience
 ├── projects.html                    Projects page
 ├── project-force-sensor.html         Detail page for Project 1
 ├── project-menstrual-pad.html        Detail page for Project 2
@@ -17,7 +17,7 @@ portfolio/
 ├── css/
 │   └── style.css                       All styling — colors, fonts, layout
 ├── js/
-│   └── main.js                          Mobile nav toggle + active-link highlighting
+│   └── main.js                          Mobile nav, active-link highlight, fullscreen media viewer
 ├── assets/
 │   ├── resume.pdf                        Your resume — replace this file to update
 │   ├── img/                              Placeholder photos/illustrations (SVGs)
@@ -66,8 +66,8 @@ GitHub's own web editor, etc.) and edit the text directly. A few common edits:
 - **Change your bio / intro text:** edit the `<div class="hero-content">` block
   in `index.html`.
 - **Update your email / LinkedIn:** in `index.html`, edit the two links inside
-  `<div class="hero-contact">` — change the `mailto:` address and the LinkedIn
-  URL, and update the visible text too.
+  `<div class="contact-grid">` — change the `mailto:` address and the LinkedIn
+  URL, and update the visible text in `.contact-value` too.
 - **Add or edit a work experience entry:** in `index.html`, copy an entire
   `<div class="log-entry">...</div>` block and edit the dates/title/description.
 - **Add or edit a project card:** in `projects.html`, copy an entire
@@ -80,9 +80,9 @@ GitHub's own web editor, etc.) and edit the text directly. A few common edits:
   button (in `projects.html`) at that filename.
 - **Fill in a project detail page:** each `project-*.html` file has a
   `.gallery-grid` section with placeholder photos — swap the `src` on each
-  `<img>` for a real photo, and add more `<img>` tags (wrapped the same way,
-  in a `<div class="media-frame">`) for more photos. Add more `<p>` or `<li>`
-  tags inside `.detail-body` for more written detail.
+  `<img>` for a real photo, and add more `<div class="media-frame"><img ...></div>`
+  blocks for more photos. Add more `<p>` or `<li>` tags inside `.detail-body`
+  for more written detail.
 - **Swap a project image:** drop your image file into `assets/img/` and change
   the `src="..."` on the matching `<img>` tag. Keep images under ~500KB
   each (resize/compress before uploading) so the site stays fast.
@@ -96,12 +96,18 @@ GitHub's own web editor, etc.) and edit the text directly. A few common edits:
   under ~15–20MB) — GitHub Pages isn't meant for heavy media hosting. For
   longer or higher-quality videos, upload to YouTube and embed an `<iframe>`
   instead so the video streams from YouTube rather than your repo.
+- **Fullscreen viewing:** any image or video wrapped in `<div class="media-frame">...</div>`
+  automatically gets a hover-to-reveal expand button in the corner (always
+  visible on mobile) that opens the media full-screen in a lightbox. You don't
+  need to add anything extra — just keep using the `media-frame` wrapper.
 - **Update your resume:** replace `assets/resume.pdf` with your new PDF, keeping
   the exact filename `resume.pdf` (or update the `src`/`href` in `resume.html`
   if you rename it). The embed is sized to a standard page's proportions so it
   stays readable on both desktop and mobile without the visitor needing to zoom.
 - **Change colors:** every color is defined once at the top of `css/style.css`
   inside `:root { ... }`. Change a hex value there and it updates everywhere.
+  The `.tag-orange` class and `.media-frame.shadow-orange` class let you swap
+  individual accents between green and orange.
 - **Change fonts:** the Google Fonts `<link>` tags are in the `<head>` of each
   HTML file, and the font names are set in `css/style.css` under
   `--font-display` (headings) and `--font-body` (everything else).

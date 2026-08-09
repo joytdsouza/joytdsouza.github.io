@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="accent-bar"></div>
 
   <header class="navbar">
     <div class="container">
@@ -45,7 +46,11 @@
        Each project is one .project-entry block: image always on the left, text
        always on the right. To add a new project, copy a whole block (including
        the closing </div>) and edit the content inside.
-       Swap the <img> for a <video controls> tag to embed a video instead.
+       Swap the <img> for a <video controls> tag to embed a video instead — the
+       fullscreen expand button is added automatically to anything inside a
+       "media-frame" wrapper, no extra work needed.
+       Add class="shadow-orange" to .media-frame to alternate the accent shadow
+       color; leave it off for the default green shadow.
        The "Learn More" button links to a project detail page — copy
        project-force-sensor.html as a starting template for a new project's page.
        ========================================================================== -->
@@ -72,7 +77,7 @@
         </ul>
         <div class="tag-row">
           <span class="tag">Arduino</span>
-          <span class="tag">Sensor Calibration</span>
+          <span class="tag tag-orange">Sensor Calibration</span>
           <span class="tag">3D Printing</span>
         </div>
         <div class="project-actions">
@@ -83,7 +88,7 @@
 
     <!-- PROJECT 2 -->
     <div class="project-entry">
-      <div class="project-media media-frame">
+      <div class="project-media media-frame shadow-orange">
         <img src="assets/img/project-menstrual-pad.svg" alt="Material absorbance testing for a sustainable menstrual pad">
       </div>
       <div class="project-copy">
@@ -97,7 +102,7 @@
         </ul>
         <div class="tag-row">
           <span class="tag">Materials Testing</span>
-          <span class="tag">ASTM / ISO Standards</span>
+          <span class="tag tag-orange">ASTM / ISO Standards</span>
           <span class="tag">Sustainability</span>
         </div>
         <div class="project-actions">
@@ -122,7 +127,7 @@
         </ul>
         <div class="tag-row">
           <span class="tag">Onshape</span>
-          <span class="tag">Arduino Uno</span>
+          <span class="tag tag-orange">Arduino Uno</span>
           <span class="tag">Laser Cutting</span>
         </div>
         <div class="project-actions">

@@ -6,13 +6,13 @@
   <title>Joy D'Souza — Mechanical Engineering Portfolio</title>
   <meta name="description" content="Portfolio of Joy D'Souza, Mechanical Engineering student at Georgia Tech.">
 
-  <!-- Fonts: swap or remove this link if you'd rather self-host fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="accent-bar"></div>
 
   <!-- ============================== NAVBAR ============================== -->
   <header class="navbar">
@@ -29,7 +29,7 @@
     </div>
   </header>
 
-  <!-- ============================== HERO / ABOUT ============================== -->
+  <!-- ============================== HERO ============================== -->
   <section class="hero">
     <!-- Decorative botanical line art — remove this <img> if you'd rather not have it -->
     <img src="assets/img/hero-branch.svg" alt="" class="hero-branch">
@@ -45,21 +45,44 @@
           hand or root-causing a failed product return.
         </p>
         <div class="hero-actions">
-          <a href="projects.html" class="btn btn-primary">View Projects</a>
-          <a href="resume.html" class="btn btn-outline">View Resume</a>
+          <a href="projects.html" class="btn btn-accent">View Projects</a>
+          <a href="resume.html" class="btn btn-outline on-dark">View Resume</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Contact links — edit the href values to update your email / LinkedIn -->
-        <div class="hero-contact">
-          <a href="mailto:joythdsouza@gmail.com" class="contact-link">
+  <!-- ==========================================================================
+       CONTACT ME
+       A deliberately separate block from the hero buttons above, so it reads
+       clearly as "how to reach me" rather than site navigation. Edit the
+       mailto: address and LinkedIn URL below to update your info.
+       ========================================================================== -->
+  <section class="contact-block">
+    <div class="container">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Contact Me</h2>
+      <div class="contact-grid">
+        <a href="mailto:joythdsouza@gmail.com" class="contact-card">
+          <span class="contact-stripe"></span>
+          <span class="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
-            joythdsouza@gmail.com
-          </a>
-          <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener" class="contact-link">
+          </span>
+          <span>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">joythdsouza@gmail.com</span>
+          </span>
+        </a>
+        <a href="https://www.linkedin.com/in/joytdsouza" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-stripe"></span>
+          <span class="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            linkedin.com/in/joytdsouza
-          </a>
-        </div>
+          </span>
+          <span>
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/joytdsouza</span>
+          </span>
+        </a>
       </div>
     </div>
   </section>
