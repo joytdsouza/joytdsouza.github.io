@@ -7,7 +7,7 @@
   <meta name="description" content="Project detail: Force Sensor for 3D-Printed Prosthetic, Medical Robotics Club.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -37,7 +37,7 @@
       </a>
 
       <div class="detail-header">
-        <span class="eyebrow">Project 01</span>
+        <span class="eyebrow tag-orange-text">Club Project</span>
         <h1>Force Sensor for 3D-Printed Prosthetic</h1>
         <div class="detail-meta">Medical Robotics Club · Atlanta, GA · Sep 2025 – Present</div>
         <div class="tag-row">
@@ -47,11 +47,12 @@
         </div>
       </div>
 
-      <div class="media-frame" style="margin-bottom:48px;">
+      <div class="media-frame">
         <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
       </div>
+      <p class="media-caption">FSR voltage response across repeated calibration trials, plotted against known applied loads.</p>
 
-      <div class="detail-body">
+      <div class="detail-body" style="margin-top:36px;">
         <p>
           Developing a Force Sensing Resistor (FSR) calibration SOP to standardize sensor
           variability for integration into a low-cost 3D-printed prosthetic for
@@ -65,18 +66,62 @@
       </div>
 
       <!-- ==========================================================================
-           PHOTO GALLERY — replace these placeholder images with real photos.
-           Add or remove <div class="media-frame"><img ...></div> blocks to change
-           how many photos show up. The fullscreen expand button appears automatically.
+           PHOTO GALLERY — replace these placeholder images with real photos, and
+           edit the caption text under each one. Add or remove whole .gallery-item
+           blocks to change how many photos show up. The fullscreen expand button
+           appears automatically on anything inside a "media-frame".
            ========================================================================== -->
       <div class="gallery-grid">
-        <div class="media-frame"><img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project"></div>
-        <div class="media-frame shadow-orange"><img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project"></div>
+        <div class="gallery-item">
+          <div class="media-frame">
+            <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
+          </div>
+          <p class="media-caption">Caption goes here — e.g. "Calibration rig with FSR mounted under a 3D-printed force distributor."</p>
+        </div>
+        <div class="gallery-item">
+          <div class="media-frame shadow-orange">
+            <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
+          </div>
+          <p class="media-caption">Caption goes here — e.g. "Voltage output logged in Arduino Serial Plotter during a test run."</p>
+        </div>
       </div>
 
-      <div class="detail-placeholder-note">
-        This page is a starting template — swap in real photos, add more detail to
-        the write-up above, or drop in a video walkthrough as this project develops.
+      <!-- ==========================================================================
+           INTERACTIVE CAD MODEL (optional) — renders an .stl file you can
+           rotate, zoom, and pan. Uses three.js loaded from a CDN, so it needs
+           an internet connection and adds some load time; remove the whole
+           .cad-viewer-wrap block if you'd rather not include it on a page.
+           To point it at your own part: change data-stl to your file's path
+           inside assets/models/.
+           ========================================================================== -->
+      <h3 class="detail-subhead">Interactive CAD Model</h3>
+      <div class="cad-viewer-wrap">
+        <div class="cad-viewer" data-stl="assets/models/sample-part.stl"></div>
+        <p class="cad-caption"><strong>Drag</strong> to rotate · <strong>Scroll</strong> to zoom · <strong>Right-click drag</strong> (or two-finger drag) to pan. This is a placeholder bracket — swap in your own .stl from Onshape/SolidWorks/Fusion.</p>
+      </div>
+
+      <!-- ==========================================================================
+           EMBEDDED PDF (optional) — same reusable pattern as the Resume page.
+           Good for a spec sheet, calibration report, or engineering drawing.
+           Drop your PDF in assets/ and update the src below; delete this whole
+           block if you don't need it on a given page.
+           ========================================================================== -->
+      <h3 class="detail-subhead">Calibration Report</h3>
+      <div class="doc-embed-wrap media-frame" style="margin: 0 0 12px;">
+        <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="doc-embed">
+          <div class="doc-fallback">
+            Your browser can't display this PDF.
+            <br><br>
+            <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download PDF</a>
+          </div>
+        </object>
+      </div>
+      <p class="media-caption">Placeholder PDF shown here for demonstration — replace assets/resume.pdf above with your own report.</p>
+
+      <div class="detail-placeholder-note" style="margin-top:40px;">
+        This page is a starting template — swap in real photos and captions, add
+        more detail to the write-up, drop in your own CAD file, or remove any
+        section (gallery, CAD viewer, PDF) you don't need.
       </div>
 
     </div>
@@ -84,10 +129,11 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Joy D'Souza</p>
+      <p>Last updated: August 2026</p>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
+  <script type="module" src="js/cad-viewer.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
   <meta name="description" content="Engineering projects by Joy D'Souza.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,7 +30,7 @@
 
   <section class="section" style="border-top:none; padding-bottom: 0;">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" style="margin-bottom:28px;">
         <span class="eyebrow">Selected Work</span>
         <h2>Projects</h2>
         <p style="color:var(--navy-soft); margin-top:14px;">
@@ -38,26 +38,41 @@
           to a class competition robot.
         </p>
       </div>
+
+      <!-- ==========================================================================
+           FILTER BAR
+           Each button's data-filter must match a data-category value used on a
+           .project-entry below ("class", "club", or "personal"). Add more buttons
+           the same way if you add more categories.
+           ========================================================================== -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="class">Class Projects</button>
+        <button class="filter-btn" data-filter="club">Club Projects</button>
+        <button class="filter-btn" data-filter="personal">Personal Projects</button>
+      </div>
     </div>
   </section>
 
   <!-- ==========================================================================
        PROJECT ENTRIES
        Each project is one .project-entry block: image always on the left, text
-       always on the right. To add a new project, copy a whole block (including
-       the closing </div>) and edit the content inside.
-       Swap the <img> for a <video controls> tag to embed a video instead — the
-       fullscreen expand button is added automatically to anything inside a
-       "media-frame" wrapper, no extra work needed.
-       Add class="shadow-orange" to .media-frame to alternate the accent shadow
-       color; leave it off for the default green shadow.
+       always on the right. Set data-category="class" | "club" | "personal" on
+       the block to control which filter button shows it — that's the only
+       thing the filter looks at, so just change this attribute to recategorize
+       a project.
+       To add a new project, copy a whole block (including the closing </div>)
+       and edit the content inside. Swap the <img> for a <video controls> tag to
+       embed a video instead — the fullscreen expand button is added
+       automatically to anything inside a "media-frame" wrapper.
+       Add class="shadow-orange" to .media-frame to alternate the accent shadow color.
        The "Learn More" button links to a project detail page — copy
        project-force-sensor.html as a starting template for a new project's page.
        ========================================================================== -->
   <div class="container">
 
-    <!-- PROJECT 1 -->
-    <div class="project-entry">
+    <!-- PROJECT 1 — Club Project -->
+    <div class="project-entry" data-category="club">
       <div class="project-media media-frame">
         <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
         <!-- To embed a video instead of an image, replace the <img> above with:
@@ -67,7 +82,7 @@
         -->
       </div>
       <div class="project-copy">
-        <div class="project-number">01</div>
+        <span class="eyebrow tag-orange-text">Club Project</span>
         <h3>Force Sensor for 3D-Printed Prosthetic</h3>
         <div class="project-org">Medical Robotics Club · Atlanta, GA · Sep 2025 – Present</div>
         <ul>
@@ -86,13 +101,13 @@
       </div>
     </div>
 
-    <!-- PROJECT 2 -->
-    <div class="project-entry">
+    <!-- PROJECT 2 — Club Project -->
+    <div class="project-entry" data-category="club">
       <div class="project-media media-frame shadow-orange">
         <img src="assets/img/project-menstrual-pad.svg" alt="Material absorbance testing for a sustainable menstrual pad">
       </div>
       <div class="project-copy">
-        <div class="project-number">02</div>
+        <span class="eyebrow tag-orange-text">Club Project</span>
         <h3>Sustainable Menstrual Pad</h3>
         <div class="project-org">GT Engineers Without Borders — Wish For WASH · Atlanta, GA · Oct 2024 – Present</div>
         <ul>
@@ -111,13 +126,13 @@
       </div>
     </div>
 
-    <!-- PROJECT 3 -->
-    <div class="project-entry">
+    <!-- PROJECT 3 — Class Project -->
+    <div class="project-entry" data-category="class">
       <div class="project-media media-frame">
         <img src="assets/img/project-autonomous-robot.svg" alt="Autonomous competition robot chassis schematic">
       </div>
       <div class="project-copy">
-        <div class="project-number">03</div>
+        <span class="eyebrow tag-orange-text">Class Project</span>
         <h3>Autonomous Competition Robot</h3>
         <div class="project-org">ME2110 · Atlanta, GA · Sep 2025 – Nov 2025</div>
         <ul>
@@ -136,11 +151,13 @@
       </div>
     </div>
 
+    <p class="filter-empty">No projects in this category yet — check back soon, or add one by copying a <code>.project-entry</code> block in projects.html and setting its <code>data-category</code>.</p>
+
   </div>
 
-  <footer>
+  <footer style="margin-top:64px;">
     <div class="container">
-      <p>© 2026 Joy D'Souza</p>
+      <p>Last updated: August 2026</p>
     </div>
   </footer>
 

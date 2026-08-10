@@ -2,25 +2,31 @@
 
 A simple portfolio (About / Projects / Resume + a detail page per project) built
 with plain HTML, CSS, and a small bit of JS — no build tools, frameworks, or
-dependencies. Designed to be hosted for free on GitHub Pages.
+dependencies (beyond the optional CAD viewer, which loads three.js from a CDN).
+Designed to be hosted for free on GitHub Pages.
 
 ## File structure
 
 ```
 portfolio/
-├── index.html                      About page (homepage) — hero + Contact Me + Experience
-├── projects.html                    Projects page
-├── project-force-sensor.html         Detail page for Project 1
+├── index.html                      About page — hero, Experience, Contact Me
+├── projects.html                    Projects page — filterable by category
+├── project-force-sensor.html         Detail page for Project 1 (includes the
+│                                       CAD viewer + PDF embed demo)
 ├── project-menstrual-pad.html        Detail page for Project 2
 ├── project-autonomous-robot.html     Detail page for Project 3
 ├── resume.html                        Resume page (embeds assets/resume.pdf)
 ├── css/
 │   └── style.css                       All styling — colors, fonts, layout
 ├── js/
-│   └── main.js                          Mobile nav, active-link highlight, fullscreen media viewer
+│   ├── main.js                          Mobile nav, active-link highlight,
+│   │                                      fullscreen media viewer, project filter
+│   └── cad-viewer.js                     Interactive STL viewer (three.js via CDN)
 ├── assets/
 │   ├── resume.pdf                        Your resume — replace this file to update
 │   ├── img/                              Placeholder photos/illustrations (SVGs)
+│   ├── models/
+│   │   └── sample-part.stl                Placeholder CAD file for the STL viewer demo
 │   └── videos/                           Put project video files here if you use them
 └── README.md
 ```
@@ -33,7 +39,7 @@ portfolio/
    name in path), name the repo exactly `<your-username>.github.io`.
 2. Upload all the files in this folder to the repo, **keeping the folder
    structure** (the `css`, `js`, and `assets` folders must stay where they are
-   relative to the HTML files). Easiest way:
+   relative to the HTML files).
    - On the repo page, click **Add file → Upload files**, drag the whole
      `portfolio` folder's contents in, and commit.
    - Or, if you use git locally:
@@ -55,69 +61,87 @@ portfolio/
 4. Wait 1–2 minutes. GitHub will show you the live URL at the top of that
    Pages settings screen.
 
-Any time you push new commits to `main`, the live site updates automatically
-within a minute or two.
-
 ## 3. Editing content
 
-Everything is plain HTML — open any `.html` file in a text editor (VS Code,
-GitHub's own web editor, etc.) and edit the text directly. A few common edits:
+### About page
+- **Bio / intro text:** edit `<div class="hero-content">` in `index.html`.
+- **Hero background:** currently `assets/img/hero-bg-illustration.svg`, scaled
+  to fill the whole hero. Replace it with a real photo any time — same
+  filename, or update the `src` on `<img class="hero-bg-illustration">`.
+  Because it's `object-fit: cover`, any photo you drop in will fill the space
+  without distortion.
+- **Company logo + link (Experience section):** each `.log-entry` starts with
+  a small squared chip (currently two-letter initials like "SN" or "GT").
+  - To link it to the company: use `<a href="https://company.com" target="_blank" rel="noopener" class="log-logo">SN</a>`.
+  - To leave it unlinked: use `<div class="log-logo">SN</div>` instead.
+  - To use a real logo image instead of initials: put the image in
+    `assets/img/logos/` and replace the chip's text with
+    `<img src="assets/img/logos/company.png" alt="Company name">` (add
+    `width:100%; height:100%; object-fit:contain;` inline style if needed).
+- **Contact Me:** now sits at the bottom of the page, just above the footer.
+  Edit the two links inside `<div class="contact-grid">` — the `mailto:`
+  address, the LinkedIn URL, and the visible text in each `.contact-value`.
 
-- **Change your bio / intro text:** edit the `<div class="hero-content">` block
-  in `index.html`.
-- **Update your email / LinkedIn:** in `index.html`, edit the two links inside
-  `<div class="contact-grid">` — change the `mailto:` address and the LinkedIn
-  URL, and update the visible text in `.contact-value` too.
-- **Add or edit a work experience entry:** in `index.html`, copy an entire
-  `<div class="log-entry">...</div>` block and edit the dates/title/description.
-- **Add or edit a project card:** in `projects.html`, copy an entire
-  `<div class="project-entry">...</div>` block (including the closing `</div>`)
-  and edit the content. Image stays on the left, text on the right, for every
-  entry — that's intentional and consistent across all projects.
-- **Add a project's detail page:** copy one of the existing
-  `project-*.html` files, rename it (e.g. `project-my-new-thing.html`), edit
-  the title/text/photos inside, then point a new project card's "Learn More"
-  button (in `projects.html`) at that filename.
-- **Fill in a project detail page:** each `project-*.html` file has a
-  `.gallery-grid` section with placeholder photos — swap the `src` on each
-  `<img>` for a real photo, and add more `<div class="media-frame"><img ...></div>`
-  blocks for more photos. Add more `<p>` or `<li>` tags inside `.detail-body`
-  for more written detail.
-- **Swap a project image:** drop your image file into `assets/img/` and change
-  the `src="..."` on the matching `<img>` tag. Keep images under ~500KB
-  each (resize/compress before uploading) so the site stays fast.
-- **Embed a video instead of an image:** replace the `<img>` tag with:
-  ```html
-  <video controls poster="assets/img/your-poster.jpg">
-    <source src="assets/videos/your-video.mp4" type="video/mp4">
-  </video>
-  ```
-  Put the video file in `assets/videos/`. Keep video files small (compress to
-  under ~15–20MB) — GitHub Pages isn't meant for heavy media hosting. For
-  longer or higher-quality videos, upload to YouTube and embed an `<iframe>`
-  instead so the video streams from YouTube rather than your repo.
-- **Fullscreen viewing:** any image or video wrapped in `<div class="media-frame">...</div>`
-  automatically gets a hover-to-reveal expand button in the corner (always
-  visible on mobile) that opens the media full-screen in a lightbox. You don't
-  need to add anything extra — just keep using the `media-frame` wrapper.
-- **Update your resume:** replace `assets/resume.pdf` with your new PDF, keeping
-  the exact filename `resume.pdf` (or update the `src`/`href` in `resume.html`
-  if you rename it). The embed is sized to a standard page's proportions so it
-  stays readable on both desktop and mobile without the visitor needing to zoom.
-- **Change colors:** every color is defined once at the top of `css/style.css`
-  inside `:root { ... }`. Change a hex value there and it updates everywhere.
-  The `.tag-orange` class and `.media-frame.shadow-orange` class let you swap
-  individual accents between green and orange.
-- **Change fonts:** the Google Fonts `<link>` tags are in the `<head>` of each
-  HTML file, and the font names are set in `css/style.css` under
-  `--font-display` (headings) and `--font-body` (everything else).
+### Projects page
+- **Category filter:** each `.project-entry` has a `data-category` attribute
+  set to `class`, `club`, or `personal`. Change that value to move a project
+  between filter tabs — nothing else needs to change. The filter buttons
+  themselves are the `.filter-btn` elements near the top of `projects.html`;
+  add another one (with a matching `data-filter` value) if you want a new
+  category.
+- **Add or edit a project card:** copy an entire `<div class="project-entry">...</div>`
+  block and edit the content. Image stays on the left, text on the right, for
+  every entry.
+- **Add a project's detail page:** copy one of the existing `project-*.html`
+  files, rename it, edit the content, then point a new card's "Learn More"
+  button at that filename.
+
+### Project detail pages
+- **Captions:** every photo sits in a `.gallery-item` with a `.media-caption`
+  paragraph right underneath — edit that text directly.
+- **CAD / STL viewer:** `project-force-sensor.html` has a working example —
+  a `<div class="cad-viewer" data-stl="assets/models/your-part.stl"></div>`.
+  Visitors can rotate (drag), zoom (scroll), and pan (right-click drag, or
+  two-finger drag on trackpad/touch). To use it on another project page, copy
+  that block plus the `<script type="module" src="js/cad-viewer.js"></script>`
+  tag near the bottom of the file, and point `data-stl` at your own exported
+  `.stl` file placed in `assets/models/`. **Note:** this loads three.js from a
+  CDN (unpkg.com), so it needs an internet connection and adds some load time
+  — only include it on pages where an interactive model is actually useful.
+- **Embedded PDF:** same pattern as the Resume page, reusable anywhere — see
+  the "Calibration Report" section in `project-force-sensor.html` for a
+  working example. Good for spec sheets, drawings, or reports. Delete the
+  block if you don't need it on a given page.
+
+### Resume page
+- Replace `assets/resume.pdf` with your new PDF, keeping the filename
+  `resume.pdf` (or update `resume.html` if you rename it). The embed is sized
+  to a standard page's proportions so it stays readable on both desktop and
+  mobile without zooming.
+
+### Site-wide
+- **Fullscreen viewing:** any image or video wrapped in
+  `<div class="media-frame">...</div>` automatically gets a hover-to-reveal
+  expand button (always visible on mobile) that opens it full-screen in a
+  lightbox. No extra setup needed.
+- **"Last updated" date:** each page's footer reads `Last updated: August 2026`
+  — update this text by hand whenever you make a meaningful content edit.
+- **Colors:** every color is defined once at the top of `css/style.css` inside
+  `:root { ... }`.
+- **Fonts:** headings use Spectral, set via `--font-display` in `css/style.css`
+  plus the Google Fonts `<link>` in each page's `<head>`. If you'd rather try
+  Lora, Source Serif 4, Newsreader, or Petrona, swap the family name in both
+  places — they're all similar in mood to Spectral.
 
 ## 4. Notes on performance
 
-- No frameworks, no build step, no external JS libraries — the whole site is
-  a handful of KB of HTML/CSS/JS plus whatever images/videos you add.
-- The placeholder project images are lightweight SVGs. Once you swap in real
-  photos, compress them first (e.g. [squoosh.app](https://squoosh.app)) and
-  prefer `.webp` or optimized `.jpg` over large PNGs.
-- Keep any embedded videos short/compressed, or host them on YouTube/Vimeo and
-  embed instead of uploading raw video files to the repo.
+- No frameworks, no build step — the whole site is a handful of KB of
+  HTML/CSS/JS plus whatever images/videos/models you add.
+- The CAD viewer is the one exception: three.js is a real (if small-ish)
+  library loaded from a CDN. It only activates on pages that include a
+  `.cad-viewer` element and the `cad-viewer.js` script tag, so pages without
+  it stay lightweight.
+- Compress real photos before uploading (e.g. [squoosh.app](https://squoosh.app))
+  and prefer `.webp` or optimized `.jpg` over large PNGs.
+- Keep STL files reasonably light for a snappy viewer — decimate/simplify a
+  high-poly export if your CAD tool produces a huge file.

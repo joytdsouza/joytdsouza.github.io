@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Joy D'Souza — Mechanical Engineering Portfolio</title>
   <meta name="description" content="Portfolio of Joy D'Souza, Mechanical Engineering student at Georgia Tech.">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-<!---  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+  <!-- Display font is Spectral. To try Lora, Source Serif 4, Newsreader, or
+       Petrona instead: swap the family name below AND in css/style.css (--font-display). -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,9 +32,11 @@
   </header>
 
   <!-- ============================== HERO ============================== -->
+  <!-- Full-bleed background: assets/img/hero-bg-illustration.svg. Replace this
+       file with a real photo any time (keep the same filename, or update the
+       src below) — it's set up to cover the entire hero regardless of shape. -->
   <section class="hero">
-    <!-- Decorative botanical line art — remove this <img> if you'd rather not have it -->
-    <img src="assets/img/header.jpg" alt="" class="hero-branch">
+    <img src="assets/img/hero-bg-illustration.svg" alt="" class="hero-bg-illustration">
     <div class="container">
       <div class="hero-content">
         <span class="hero-title">Mechanical Engineering · Georgia Tech</span>
@@ -53,11 +56,78 @@
     </div>
   </section>
 
+  <!-- ============================== EXPERIENCE ============================== -->
   <!-- ==========================================================================
-       CONTACT ME
-       A deliberately separate block from the hero buttons above, so it reads
-       clearly as "how to reach me" rather than site navigation. Edit the
-       mailto: address and LinkedIn URL below to update your info.
+       Each entry can show a company logo/link. For now these are simple squared
+       initials chips — drop a real logo image in assets/img/logos/ and swap the
+       chip's inner text for an <img> tag when you have one. Wrap the chip in
+       <a href="https://company-site.com" target="_blank" rel="noopener"> to make
+       it (and the org name below it) clickable, or leave it as a plain <div> for
+       no link.
+       ========================================================================== -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Work Log</span>
+        <h2>Experience</h2>
+      </div>
+
+      <div class="log-entry">
+        <div class="log-logo" aria-label="Design for Planet Impact">DP</div>
+        <div class="log-date">Jun 2026 — Present</div>
+        <div class="log-role">
+          <h3>Student Assistant</h3>
+          <div class="log-org">Design for Planet Impact · Atlanta, GA</div>
+          <p>Research global challenges aligned with UN Sustainable Development Goals for a student-led org designing sustainable, human-centered devices — studying existing solutions, adoption barriers, and target markets to propose new device concepts.</p>
+        </div>
+      </div>
+
+      <div class="log-entry">
+        <a href="https://www.sharkninja.com" target="_blank" rel="noopener" class="log-logo" aria-label="SharkNinja">SN</a>
+        <div class="log-date">May 2026 — Jul 2026</div>
+        <div class="log-role">
+          <h3>Product Test Engineering Intern</h3>
+          <div class="log-org"><a href="https://www.sharkninja.com" target="_blank" rel="noopener">SharkNinja</a> · Needham, MA</div>
+          <p>Built a Python annotation app to quantify hair-curl geometry across six metrics, correlating results with consumer ratings to set KPI targets. Designed a standardized curl-retention test rig and ran Gage R&amp;R analysis to validate the measurement system.</p>
+        </div>
+      </div>
+
+      <div class="log-entry">
+        <a href="https://www.gatech.edu" target="_blank" rel="noopener" class="log-logo" aria-label="Georgia Tech">GT</a>
+        <div class="log-date">Jan 2026 — Present</div>
+        <div class="log-role">
+          <h3>Undergraduate Researcher</h3>
+          <div class="log-org"><a href="https://www.gatech.edu" target="_blank" rel="noopener">Georgia Tech</a> · Atlanta, GA</div>
+          <p>Integrating a Raspberry Pi 5, machine vision system, and custom gripper with a UR5 robotic arm for pick-and-place tasks. Trained an object detection model in RoboFlow and designed a 3D-printed claw modification to improve grasp performance.</p>
+        </div>
+      </div>
+
+      <div class="log-entry">
+        <a href="https://www.sharkninja.com" target="_blank" rel="noopener" class="log-logo" aria-label="SharkNinja">SN</a>
+        <div class="log-date">May 2025 — Aug 2025</div>
+        <div class="log-role">
+          <h3>Quality Engineering Intern</h3>
+          <div class="log-org"><a href="https://www.sharkninja.com" target="_blank" rel="noopener">SharkNinja</a> · Needham, MA</div>
+          <p>Analyzed 2,000+ customer reviews and support calls to surface top product detractors. Performed teardown/RCA on 50+ returned units and worked cross-functionally on corrective actions, including an RF signal strength rework.</p>
+        </div>
+      </div>
+
+      <div class="log-entry">
+        <a href="https://www.mathnasium.com" target="_blank" rel="noopener" class="log-logo" aria-label="Mathnasium">MN</a>
+        <div class="log-date">Aug 2022 — Aug 2024</div>
+        <div class="log-role">
+          <h3>Level 2 Instructor</h3>
+          <div class="log-org"><a href="https://www.mathnasium.com" target="_blank" rel="noopener">Mathnasium</a> · Hanover, MA</div>
+          <p>Tutored up to three students simultaneously across elementary through 10th-grade math, tailoring lesson plans to different learning styles and tracking progress through parent communication.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT ME — now placed at the bottom of the page, above the footer.
+       Edit the mailto: address and LinkedIn URL below to update your info.
        ========================================================================== -->
   <section class="contact-block">
     <div class="container">
@@ -88,67 +158,11 @@
     </div>
   </section>
 
-  <!-- ============================== EXPERIENCE ============================== -->
-  <section class="section" id="experience">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Work Log</span>
-        <h2>Experience</h2>
-      </div>
-
-      <!-- Add / edit entries by copying a .log-entry block -->
-      <div class="log-entry">
-        <div class="log-date">Jun 2026 — Present</div>
-        <div class="log-role">
-          <h3>Student Assistant</h3>
-          <div class="log-org">Design for Planet Impact · Atlanta, GA</div>
-          <p>Research global challenges aligned with UN Sustainable Development Goals for a student-led org designing sustainable, human-centered devices — studying existing solutions, adoption barriers, and target markets to propose new device concepts.</p>
-        </div>
-      </div>
-
-      <div class="log-entry">
-        <div class="log-date">May 2026 — Jul 2026</div>
-        <div class="log-role">
-          <h3>Product Test Engineering Intern</h3>
-          <div class="log-org">SharkNinja · Needham, MA</div>
-          <p>Built a Python annotation app to quantify hair-curl geometry across six metrics, correlating results with consumer ratings to set KPI targets. Designed a standardized curl-retention test rig and ran Gage R&amp;R analysis to validate the measurement system.</p>
-        </div>
-      </div>
-
-      <div class="log-entry">
-        <div class="log-date">Jan 2026 — Present</div>
-        <div class="log-role">
-          <h3>Undergraduate Researcher</h3>
-          <div class="log-org">Georgia Tech · Atlanta, GA</div>
-          <p>Integrating a Raspberry Pi 5, machine vision system, and custom gripper with a UR5 robotic arm for pick-and-place tasks. Trained an object detection model in RoboFlow and designed a 3D-printed claw modification to improve grasp performance.</p>
-        </div>
-      </div>
-
-      <div class="log-entry">
-        <div class="log-date">May 2025 — Aug 2025</div>
-        <div class="log-role">
-          <h3>Quality Engineering Intern</h3>
-          <div class="log-org">SharkNinja · Needham, MA</div>
-          <p>Analyzed 2,000+ customer reviews and support calls to surface top product detractors. Performed teardown/RCA on 50+ returned units and worked cross-functionally on corrective actions, including an RF signal strength rework.</p>
-        </div>
-      </div>
-
-      <div class="log-entry">
-        <div class="log-date">Aug 2022 — Aug 2024</div>
-        <div class="log-role">
-          <h3>Level 2 Instructor</h3>
-          <div class="log-org">Mathnasium · Hanover, MA</div>
-          <p>Tutored up to three students simultaneously across elementary through 10th-grade math, tailoring lesson plans to different learning styles and tracking progress through parent communication.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- ============================== FOOTER ============================== -->
+  <!-- Update this date whenever you edit the site's content -->
   <footer>
     <div class="container">
-      <p>© 2026 Joy D'Souza</p>
+      <p>Last updated: August 2026</p>
     </div>
   </footer>
 
