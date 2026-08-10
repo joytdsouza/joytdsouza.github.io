@@ -94,4 +94,34 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', onKeydown);
   }
+
+  // ========================================================================
+  // Projects page filter — toggles which .project-entry blocks are visible
+  // based on each entry's data-category attribute ("class", "club", "personal").
+  // ========================================================================
+  const filterBar = document.querySelector('.filter-bar');
+  if (filterBar) {
+    const buttons = filterBar.querySelectorAll('.filter-btn');
+    const entries = document.querySelectorAll('.project-entry');
+    const emptyMsg = document.querySelector('.filter-empty');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        let visibleCount = 0;
+
+        entries.forEach((entry) => {
+          const category = entry.getAttribute('data-category');
+          const show = filter === 'all' || category === filter;
+          entry.classList.toggle('filtered-out', !show);
+          if (show) visibleCount++;
+        });
+
+        if (emptyMsg) emptyMsg.classList.toggle('visible', visibleCount === 0);
+      });
+    });
+  }
 });
