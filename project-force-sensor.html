@@ -28,100 +28,115 @@
     </div>
   </header>
 
-  <section class="section" style="border-top:none;">
+  <section class="detail-hero-band">
     <div class="container">
-
       <a href="projects.html" class="detail-back">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         All Projects
       </a>
-
       <div class="detail-header">
-        <span class="eyebrow tag-orange-text">Club Project</span>
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Club Project</span>
+          <span class="status-badge status-ongoing">Ongoing</span>
+        </div>
         <h1>Force Sensor for 3D-Printed Prosthetic</h1>
         <div class="detail-meta">Medical Robotics Club · Atlanta, GA · Sep 2025 – Present</div>
-        <div class="tag-row">
-          <span class="tag">Arduino</span>
-          <span class="tag tag-orange">Sensor Calibration</span>
-          <span class="tag">3D Printing</span>
-        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="media-frame">
-        <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
+  <section class="section" style="border-top:none;">
+    <div class="container">
+
+      <!-- ==========================================================================
+           MAIN MEDIA — full width. Replace the src below with your project's
+           primary photo, render, or video still.
+           ========================================================================== -->
+      <div class="media-frame detail-main-media">
+        <img src="assets/img/photo-placeholder.svg" alt="Add a primary image for Force Sensor for 3D-Printed Prosthetic">
       </div>
-      <p class="media-caption">FSR voltage response across repeated calibration trials, plotted against known applied loads.</p>
+      <p class="media-caption">Caption goes here — describe what this main image shows.</p>
 
-      <div class="detail-body" style="margin-top:36px;">
+      <!-- ==========================================================================
+           OBJECTIVE — what problem/assignment/goal this project addresses.
+           ========================================================================== -->
+      <div class="detail-section" style="margin-top:48px;">
+        <span class="detail-section-label">Objective</span>
         <p>
-          Developing a Force Sensing Resistor (FSR) calibration SOP to standardize sensor
-          variability for integration into a low-cost 3D-printed prosthetic for
-          trans-radial amputees.
+          Placeholder text — describe the goal of this project: what problem you were
+          solving, who it was for, and any constraints you were given (team size,
+          budget, timeline, assignment requirements).
         </p>
-        <ul>
-          <li>Calibrating FSRs using known weights and Arduino-collected voltage data to analytically define soft/medium/hard touch thresholds as prosthetic feedback.</li>
-          <li>Designed a 3D-printed force distributor to evenly concentrate applied loads on the sensing surface for repeatable calibration testing.</li>
-        </ul>
-        <!-- Add more paragraphs here as the project develops -->
       </div>
 
       <!-- ==========================================================================
-           PHOTO GALLERY — replace these placeholder images with real photos, and
-           edit the caption text under each one. Add or remove whole .gallery-item
-           blocks to change how many photos show up. The fullscreen expand button
-           appears automatically on anything inside a "media-frame".
+           PROJECT DESCRIPTION — what you actually did.
+           ========================================================================== -->
+      <div class="detail-section">
+        <span class="detail-section-label">Project Description</span>
+        <p>
+          Placeholder text — walk through your process and your specific contributions:
+          the tools you used, the design decisions you made, and how the project
+          progressed from concept to result.
+        </p>
+      </div>
+
+      <!-- ==========================================================================
+           REFLECTION — what you learned / would do differently.
+           ========================================================================== -->
+      <div class="detail-section">
+        <span class="detail-section-label">Reflection</span>
+        <p>
+          Placeholder text — reflect on what you learned, challenges you ran into and
+          how you solved them, and what you'd change if you did this project again.
+        </p>
+      </div>
+
+      <!-- ==========================================================================
+           SKILLS — one consistent tag color, no alternating.
+           ========================================================================== -->
+      <div class="skill-tags-wrap" style="max-width:740px; border-top:none; padding-top:0; margin-top:-8px;">
+        <span class="skill-tags-label">Skills</span>
+        <div class="skill-tags">
+          <span class="skill-tag">Skill One</span>
+          <span class="skill-tag">Skill Two</span>
+        </div>
+      </div>
+
+      <!-- ==========================================================================
+           ADDITIONAL MEDIA — rectangles, max two per row, no labels (just a
+           caption underneath each). Any type (photo, video, CAD, PDF) works here
+           and is fullscreen-interactive automatically via the .media-frame class.
            ========================================================================== -->
       <div class="gallery-grid">
         <div class="gallery-item">
           <div class="media-frame">
             <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
           </div>
-          <p class="media-caption">Caption goes here — e.g. "Calibration rig with FSR mounted under a 3D-printed force distributor."</p>
+          <p class="media-caption">Caption goes here.</p>
         </div>
         <div class="gallery-item">
-          <div class="media-frame shadow-orange">
-            <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
+          <div class="cad-viewer media-frame" data-stl="assets/models/sample-part.stl"></div>
+          <p class="media-caption">Drag to rotate, scroll to zoom, right-click drag (or two-finger drag) to pan. Swap in your own .stl from Onshape/SolidWorks/Fusion.</p>
+        </div>
+        <div class="gallery-item">
+          <div class="doc-embed-wrap media-frame">
+            <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="doc-embed">
+              <div class="doc-fallback">
+                Your browser can't display this PDF.
+                <br><br>
+                <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download PDF</a>
+              </div>
+            </object>
           </div>
-          <p class="media-caption">Caption goes here — e.g. "Voltage output logged in Arduino Serial Plotter during a test run."</p>
+          <p class="media-caption">Caption goes here — e.g. name of the report or drawing.</p>
         </div>
       </div>
 
-      <!-- ==========================================================================
-           INTERACTIVE CAD MODEL (optional) — renders an .stl file you can
-           rotate, zoom, and pan. Uses three.js loaded from a CDN, so it needs
-           an internet connection and adds some load time; remove the whole
-           .cad-viewer-wrap block if you'd rather not include it on a page.
-           To point it at your own part: change data-stl to your file's path
-           inside assets/models/.
-           ========================================================================== -->
-      <h3 class="detail-subhead">Interactive CAD Model</h3>
-      <div class="cad-viewer-wrap">
-        <div class="cad-viewer" data-stl="assets/models/sample-part.stl"></div>
-        <p class="cad-caption"><strong>Drag</strong> to rotate · <strong>Scroll</strong> to zoom · <strong>Right-click drag</strong> (or two-finger drag) to pan. This is a placeholder bracket — swap in your own .stl from Onshape/SolidWorks/Fusion.</p>
-      </div>
-
-      <!-- ==========================================================================
-           EMBEDDED PDF (optional) — same reusable pattern as the Resume page.
-           Good for a spec sheet, calibration report, or engineering drawing.
-           Drop your PDF in assets/ and update the src below; delete this whole
-           block if you don't need it on a given page.
-           ========================================================================== -->
-      <h3 class="detail-subhead">Calibration Report</h3>
-      <div class="doc-embed-wrap media-frame" style="margin: 0 0 12px;">
-        <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="doc-embed">
-          <div class="doc-fallback">
-            Your browser can't display this PDF.
-            <br><br>
-            <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download PDF</a>
-          </div>
-        </object>
-      </div>
-      <p class="media-caption">Placeholder PDF shown here for demonstration — replace assets/resume.pdf above with your own report.</p>
-
       <div class="detail-placeholder-note" style="margin-top:40px;">
-        This page is a starting template — swap in real photos and captions, add
-        more detail to the write-up, drop in your own CAD file, or remove any
-        section (gallery, CAD viewer, PDF) you don't need.
+        This page is a starting template — nothing here has been filled in yet.
+        Swap in real media and replace every placeholder paragraph above with your
+        own Objective / Project Description / Reflection content.
       </div>
 
     </div>

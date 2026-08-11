@@ -28,39 +28,49 @@
     </div>
   </header>
 
-  <section class="section" style="border-top:none; padding-bottom: 0;">
+  <section class="page-header">
     <div class="container">
-      <div class="section-head" style="margin-bottom:28px;">
+      <div class="section-head" style="margin-bottom:0;">
         <span class="eyebrow">Selected Work</span>
         <h2>Projects</h2>
-        <p style="color:var(--navy-soft); margin-top:14px;">
-          A few things I've designed, tested, and built — from a medical robotics club
+        <p style="margin-top:14px;">
+          Seven things I've designed, tested, and built — from a medical robotics club
           to a class competition robot.
         </p>
       </div>
+    </div>
+  </section>
 
+  <section class="section" style="border-top:none; padding-bottom: 0;">
+    <div class="container">
       <!-- ==========================================================================
            FILTER BAR
            Each button's data-filter must match a data-category value used on a
-           .project-entry below ("class", "club", or "personal"). Add more buttons
-           the same way if you add more categories.
+           .project-entry below ("class", "club", "personal", or "research"). Add
+           more buttons the same way if you add more categories.
            ========================================================================== -->
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="class">Class Projects</button>
         <button class="filter-btn" data-filter="club">Club Projects</button>
         <button class="filter-btn" data-filter="personal">Personal Projects</button>
+        <button class="filter-btn" data-filter="research">Research Projects</button>
       </div>
     </div>
   </section>
 
   <!-- ==========================================================================
-       PROJECT ENTRIES
+       PROJECT ENTRIES — listed in the same order as Portfolio.md
        Each project is one .project-entry block: image always on the left, text
-       always on the right. Set data-category="class" | "club" | "personal" on
-       the block to control which filter button shows it — that's the only
-       thing the filter looks at, so just change this attribute to recategorize
-       a project.
+       always on the right. Set data-category="class" | "club" | "personal" |
+       "research" on the block to control which filter button shows it — that's
+       the only thing the filter looks at, so just change this attribute to
+       recategorize a project.
+       The .type-status-row holds the project-type eyebrow plus a colored
+       .status-badge (status-ongoing / status-completed) — edit the badge text
+       and class together when a project's status changes.
+       Skills now live in .skill-tags-wrap / .skill-tag — one consistent color,
+       no more alternating tag colors.
        To add a new project, copy a whole block (including the closing </div>)
        and edit the content inside. Swap the <img> for a <video controls> tag to
        embed a video instead — the fullscreen expand button is added
@@ -74,40 +84,13 @@
     <!-- PROJECT 1 — Club Project -->
     <div class="project-entry" data-category="club">
       <div class="project-media media-frame">
-        <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
-        <!-- To embed a video instead of an image, replace the <img> above with:
-        <video controls poster="assets/img/project-force-sensor.svg">
-          <source src="assets/videos/force-sensor-demo.mp4" type="video/mp4">
-        </video>
-        -->
-      </div>
-      <div class="project-copy">
-        <span class="eyebrow tag-orange-text">Club Project</span>
-        <h3>Force Sensor for 3D-Printed Prosthetic</h3>
-        <div class="project-org">Medical Robotics Club · Atlanta, GA · Sep 2025 – Present</div>
-        <ul>
-          <li>Developing a Force Sensing Resistor (FSR) calibration SOP to standardize sensor variability for integration into a low-cost 3D-printed prosthetic for trans-radial amputees.</li>
-          <li>Calibrating FSRs using known weights and Arduino-collected voltage data to analytically define soft/medium/hard touch thresholds as prosthetic feedback.</li>
-          <li>Designed a 3D-printed force distributor to evenly concentrate applied loads on the sensing surface for repeatable calibration testing.</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag">Arduino</span>
-          <span class="tag tag-orange">Sensor Calibration</span>
-          <span class="tag">3D Printing</span>
-        </div>
-        <div class="project-actions">
-          <a href="project-force-sensor.html" class="btn btn-primary btn-sm">Learn More</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 2 — Club Project -->
-    <div class="project-entry" data-category="club">
-      <div class="project-media media-frame shadow-orange">
         <img src="assets/img/project-menstrual-pad.svg" alt="Material absorbance testing for a sustainable menstrual pad">
       </div>
       <div class="project-copy">
-        <span class="eyebrow tag-orange-text">Club Project</span>
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Club Project</span>
+          <span class="status-badge status-ongoing">Ongoing</span>
+        </div>
         <h3>Sustainable Menstrual Pad</h3>
         <div class="project-org">GT Engineers Without Borders — Wish For WASH · Atlanta, GA · Oct 2024 – Present</div>
         <ul>
@@ -115,10 +98,13 @@
           <li>Conducted single-material absorbance testing on 9 materials per ASTM and ISO standards using water and gelatin blood simulant — identifying Himalayan nettle and wood pulp as top-performing core materials.</li>
           <li>Progressing to composite and rewet testing across pad layers for absorbency, permeability, and skin comfort.</li>
         </ul>
-        <div class="tag-row">
-          <span class="tag">Materials Testing</span>
-          <span class="tag tag-orange">ASTM / ISO Standards</span>
-          <span class="tag">Sustainability</span>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Research</span>
+            <span class="skill-tag">Design for Sustainability</span>
+            <span class="skill-tag">Materials Testing</span>
+          </div>
         </div>
         <div class="project-actions">
           <a href="project-menstrual-pad.html" class="btn btn-primary btn-sm">Learn More</a>
@@ -126,13 +112,78 @@
       </div>
     </div>
 
-    <!-- PROJECT 3 — Class Project -->
+    <!-- PROJECT 2 — Club Project -->
+    <div class="project-entry" data-category="club">
+      <div class="project-media media-frame shadow-orange">
+        <img src="assets/img/project-force-sensor.svg" alt="Force sensor calibration test setup for 3D-printed prosthetic">
+      </div>
+      <div class="project-copy">
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Club Project</span>
+          <span class="status-badge status-ongoing">Ongoing</span>
+        </div>
+        <h3>Force Sensor for 3D-Printed Prosthetic</h3>
+        <div class="project-org">Medical Robotics Club — Team Limbo · Atlanta, GA · Sep 2025 – Present</div>
+        <ul>
+          <li>Developing a Force Sensing Resistor (FSR) calibration SOP to standardize sensor variability for integration into a low-cost 3D-printed prosthetic for trans-radial amputees.</li>
+          <li>Calibrating FSRs using known weights and Arduino-collected voltage data to analytically define soft/medium/hard touch thresholds as prosthetic feedback.</li>
+          <li>Designed a 3D-printed force distributor to evenly concentrate applied loads on the sensing surface for repeatable calibration testing.</li>
+        </ul>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Onshape</span>
+            <span class="skill-tag">Arduino</span>
+            <span class="skill-tag">Sensor Calibration</span>
+            <span class="skill-tag">3D Printing</span>
+          </div>
+        </div>
+        <div class="project-actions">
+          <a href="project-force-sensor.html" class="btn btn-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 — Personal Project -->
+    <div class="project-entry" data-category="personal">
+      <div class="project-media media-frame">
+        <img src="assets/img/photo-placeholder.svg" alt="Breadboard-styled perpetual calendar">
+      </div>
+      <div class="project-copy">
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Personal Project</span>
+          <span class="status-badge status-ongoing">Ongoing</span>
+        </div>
+        <h3>Breadboard Calendar</h3>
+        <div class="project-org">Personal Project · Atlanta, GA · 2025 – Present</div>
+        <ul>
+          <li>Designed a 3D-printed perpetual desk calendar styled after a breadboard, displaying the date using recognizable electrical-component shapes (LED marker, square rectifiers, Raspberry Pi Picos).</li>
+          <li>Selected each component's geometry deliberately so the calendar reads clearly at a glance while fitting on a small desk.</li>
+          <li>Rescaled all parts 150% after a first print came out too small to fabricate cleanly — a lesson in balancing realism against printability.</li>
+        </ul>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Onshape</span>
+            <span class="skill-tag">3D Printing</span>
+          </div>
+        </div>
+        <div class="project-actions">
+          <a href="project-breadboard-calendar.html" class="btn btn-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 — Class Project -->
     <div class="project-entry" data-category="class">
       <div class="project-media media-frame">
         <img src="assets/img/project-autonomous-robot.svg" alt="Autonomous competition robot chassis schematic">
       </div>
       <div class="project-copy">
-        <span class="eyebrow tag-orange-text">Class Project</span>
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Class Project</span>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
         <h3>Autonomous Competition Robot</h3>
         <div class="project-org">ME2110 · Atlanta, GA · Sep 2025 – Nov 2025</div>
         <ul>
@@ -140,13 +191,111 @@
           <li>Used Onshape, Inkscape, and Bambu Studio for component fabrication on Trotec laser cutters and Bambu Lab P1S printers.</li>
           <li>Created technical reports and presentations covering concept generation, quality function deployment, and design overview (Morphological Chart, Engineering Spec Sheet, House of Quality).</li>
         </ul>
-        <div class="tag-row">
-          <span class="tag">Onshape</span>
-          <span class="tag tag-orange">Arduino Uno</span>
-          <span class="tag">Laser Cutting</span>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Onshape</span>
+            <span class="skill-tag">Inkscape</span>
+            <span class="skill-tag">BambuStudio</span>
+            <span class="skill-tag">Trotec JobControl</span>
+            <span class="skill-tag">Laser Cutting/Engraving</span>
+            <span class="skill-tag">Technical Writing</span>
+          </div>
         </div>
         <div class="project-actions">
           <a href="project-autonomous-robot.html" class="btn btn-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 5 — Research Project -->
+    <div class="project-entry" data-category="research">
+      <div class="project-media media-frame shadow-orange">
+        <img src="assets/img/photo-placeholder.svg" alt="Custom 3D-printed gripper claw for a UR5 robotic arm">
+      </div>
+      <div class="project-copy">
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Research Project</span>
+          <span class="status-badge status-ongoing">Ongoing</span>
+        </div>
+        <h3>Claw Attachment</h3>
+        <div class="project-org">Georgia Tech, Undergraduate Research · Atlanta, GA · Jan 2026 – Present</div>
+        <ul>
+          <li>Integrating a Raspberry Pi 5, machine vision system, and custom mechanical gripper with a UR5 robotic arm for industrial pick-and-place applications.</li>
+          <li>Trained an object detection model in RoboFlow on multi-perspective images of test tubes in a holding tray.</li>
+          <li>Redesigned an oversized mechanical claw in Onshape into smaller, PETG-printed grippers compatible with the existing gear mechanism, validating fit with a mated assembly before fabrication.</li>
+        </ul>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">RoboFlow</span>
+            <span class="skill-tag">Onshape</span>
+            <span class="skill-tag">3D Printing</span>
+          </div>
+        </div>
+        <div class="project-actions">
+          <a href="project-claw-attachment.html" class="btn btn-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 6 — Class Project -->
+    <div class="project-entry" data-category="class">
+      <div class="project-media media-frame">
+        <img src="assets/img/photo-placeholder.svg" alt="All-in-one projector, popcorn maker, and delivery drone assembly">
+      </div>
+      <div class="project-copy">
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Class Project</span>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
+        <h3>All-in-One Projector, Popcorn Maker, and Food/Drink Delivery Drone</h3>
+        <div class="project-org">ME1670: Intro to Engr Graphics · Atlanta, GA · Aug 2024 – Dec 2024</div>
+        <ul>
+          <li>Worked with a 5-member team to sketch, model, and document a proposed entertainment machine combining a projector, popcorn maker, and a food/drink delivery drone.</li>
+          <li>Designed the snack-delivery drone and the popcorn maker's top plate/lid — six components total, including the drone base, fan bases, motor caps, and fan caps.</li>
+          <li>Sourced McMaster-Carr hardware and specified a magnetic connection between the fan base and drone base to also carry motor power.</li>
+        </ul>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Engineering Drawings</span>
+          </div>
+        </div>
+        <div class="project-actions">
+          <a href="project-projector-drone.html" class="btn btn-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 7 — Class Project -->
+    <div class="project-entry" data-category="class">
+      <div class="project-media media-frame shadow-orange">
+        <img src="assets/img/photo-placeholder.svg" alt="3D-printed closet door stopper hook and clamp mechanism">
+      </div>
+      <div class="project-copy">
+        <div class="type-status-row">
+          <span class="eyebrow tag-orange-text">Class Project</span>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
+        <h3>Closet Door Stopper</h3>
+        <div class="project-org">ME1670: Intro to Engr Graphics · Atlanta, GA · Aug 2024 – Dec 2024</div>
+        <ul>
+          <li>Designed an individual, SLS-printable sliding hook-and-clamp mechanism to stop a roommate's closet doors from sliding open.</li>
+          <li>Met the assignment's fabrication constraints: 2–4 interlocking parts, each with at least 4 meaningful CAD operations, within a 3in × 3in × 3in envelope per part.</li>
+          <li>All printed parts fit together and matched the closet's measured dimensions exactly, on a first CAD project.</li>
+        </ul>
+        <div class="skill-tags-wrap">
+          <span class="skill-tags-label">Skills</span>
+          <div class="skill-tags">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Engineering Drawings</span>
+            <span class="skill-tag">Tolerance Analysis</span>
+          </div>
+        </div>
+        <div class="project-actions">
+          <a href="project-closet-door-stopper.html" class="btn btn-primary btn-sm">Learn More</a>
         </div>
       </div>
     </div>

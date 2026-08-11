@@ -5,6 +5,34 @@ with plain HTML, CSS, and a small bit of JS — no build tools, frameworks, or
 dependencies (beyond the optional CAD viewer, which loads three.js from a CDN).
 Designed to be hosted for free on GitHub Pages.
 
+## Recent changes
+
+- **Experience section (About page):** the logo/date column is now wrapped in
+  `.log-rail`, which stretches the full height of each entry and fills the
+  space under the logo with a dotted connector line — this is what used to
+  read as awkward "blank space" on desktop and an extra gap between the date
+  and role on mobile.
+- **More color:** added `.page-header` (dark intro band on Projects/Resume),
+  a dark Experience section tint, and a dark Contact/footer, so the site
+  isn't all white.
+- **Resume page:** the Download PDF button (and the toolbar text above it) is
+  now centered via `.resume-toolbar`.
+- **Projects page:** all 7 projects, a `research` filter category, and a
+  `.status-badge` (Ongoing / Completed) next to each project-type eyebrow.
+- **Project detail pages:** rebuilt to a consistent order — full-width main
+  media → Objective → Project Description → Reflection → Skills → an
+  additional-media gallery (max 2 rectangles per row, no labels, just a
+  caption). Every media type (photo, video, CAD model, PDF) in the gallery is
+  now fullscreen-interactive via `.media-frame`, including live CAD models
+  (see `js/cad-viewer.js`, which now uses a `ResizeObserver` so the model
+  keeps working when reparented into the lightbox) and PDFs.
+- **Skills:** now `.skill-tags` / `.skill-tag` — one consistent color instead
+  of the old alternating `.tag` / `.tag-orange`.
+- Every project page currently has **placeholder text and blank placeholder
+  files** (empty `.svg`/`.stl`/`.pdf`) — nothing has been filled in from
+  content elsewhere. Replace the placeholders and write your own
+  Objective / Project Description / Reflection per page.
+
 ## File structure
 
 ```

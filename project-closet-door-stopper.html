@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sustainable Menstrual Pad — Joy D'Souza</title>
-  <meta name="description" content="Project detail: Sustainable Menstrual Pad, GT Engineers Without Borders.">
+  <title>Closet Door Stopper — Joy D'Souza</title>
+  <meta name="description" content="Project detail: Closet Door Stopper, ME1670.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,11 +36,11 @@
       </a>
       <div class="detail-header">
         <div class="type-status-row">
-          <span class="eyebrow tag-orange-text">Club Project</span>
-          <span class="status-badge status-ongoing">Ongoing</span>
+          <span class="eyebrow tag-orange-text">Class Project</span>
+          <span class="status-badge status-completed">Completed</span>
         </div>
-        <h1>Sustainable Menstrual Pad</h1>
-        <div class="detail-meta">GT Engineers Without Borders — Wish For WASH · Atlanta, GA · Oct 2024 – Present</div>
+        <h1>Closet Door Stopper</h1>
+        <div class="detail-meta">ME1670: Intro to Engr Graphics · Atlanta, GA · Aug 2024 – Dec 2024</div>
       </div>
     </div>
   </section>
@@ -53,7 +53,7 @@
            primary photo, render, or video still.
            ========================================================================== -->
       <div class="media-frame detail-main-media">
-        <img src="assets/img/photo-placeholder.svg" alt="Add a primary image for Sustainable Menstrual Pad">
+        <img src="assets/img/photo-placeholder.svg" alt="Add a primary image for Closet Door Stopper">
       </div>
       <p class="media-caption">Caption goes here — describe what this main image shows.</p>
 
@@ -110,16 +110,20 @@
            ========================================================================== -->
       <div class="gallery-grid">
         <div class="gallery-item">
-          <div class="media-frame">
-            <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
+          <div class="doc-embed-wrap media-frame">
+            <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="doc-embed">
+              <div class="doc-fallback">
+                Your browser can't display this PDF.
+                <br><br>
+                <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download PDF</a>
+              </div>
+            </object>
           </div>
-          <p class="media-caption">Caption goes here.</p>
+          <p class="media-caption">Caption goes here — e.g. name of the report or drawing.</p>
         </div>
         <div class="gallery-item">
-          <div class="media-frame">
-            <img src="assets/img/photo-placeholder.svg" alt="Add a photo of this project">
-          </div>
-          <p class="media-caption">Caption goes here.</p>
+          <div class="cad-viewer media-frame" data-stl="assets/models/sample-part.stl"></div>
+          <p class="media-caption">Drag to rotate, scroll to zoom, right-click drag (or two-finger drag) to pan. Swap in your own .stl from Onshape/SolidWorks/Fusion.</p>
         </div>
       </div>
 
@@ -139,5 +143,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script type="module" src="js/cad-viewer.js"></script>
 </body>
 </html>
