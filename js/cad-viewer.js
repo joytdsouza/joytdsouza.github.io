@@ -76,11 +76,17 @@ function initViewer(container) {
   function onResize() {
     const w = container.clientWidth;
     const h = container.clientHeight;
+    if (!w || !h) return;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
   }
-  window.addEventListener('resize', onResize);
+
+  // ResizeObserver (rather than a window resize listener) means this also
+  // picks up size changes from being reparented into the fullscreen
+  // lightbox (see js/main.js openCadLightbox) and back, not just window resizes.
+  const resizeObserver = new ResizeObserver(onResize);
+  resizeObserver.observe(container);
 
   function animate() {
     requestAnimationFrame(animate);

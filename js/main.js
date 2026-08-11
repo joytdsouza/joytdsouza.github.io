@@ -26,14 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ========================================================================
   // Fullscreen media viewer
-  // Any element with class="media-frame" wrapping an <img> or <video> gets a
-  // hover-reveal expand button automatically — no extra markup needed per image.
+  // Any element with class="media-frame" wrapping an <img>, <video>, or
+  // <object> (PDF embed) gets a hover-reveal expand button automatically —
+  // no extra markup needed per item. A "cad-viewer" element (interactive
+  // three.js STL model) is treated as its own frame and reparented into the
+  // lightbox live, so you can keep rotating/zooming/panning it fullscreen.
   // ========================================================================
   const expandIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
 
   document.querySelectorAll('.media-frame').forEach((frame) => {
-    const media = frame.querySelector('img, video');
-    if (!media) return;
+    const isCadViewer = frame.classList.contains('cad-viewer');
+    const media = isCadViewer ? null : frame.querySelector('img, video, object');
+    if (!media && !isCadViewer) return;
 
     const btn = document.createElement('button');
     btn.className = 'expand-btn';
@@ -45,11 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      openLightbox(media);
+      if (isCadViewer) {
+        openCadLightbox(frame);
+      } else {
+        openLightbox(media);
+      }
     });
   });
 
-  function openLightbox(media) {
+  function buildOverlayShell() {
     const overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
 
@@ -59,6 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.setAttribute('aria-label', 'Close fullscreen view');
     closeBtn.innerHTML = '&times;';
 
+    return { overlay, closeBtn };
+  }
+
+  function openLightbox(media) {
+    const { overlay, closeBtn } = buildOverlayShell();
+
     let clone;
     if (media.tagName === 'VIDEO') {
       clone = document.createElement('video');
@@ -66,12 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
       clone.src = source ? source.src : media.currentSrc || media.src;
       clone.controls = true;
       clone.autoplay = true;
+      clone.className = 'lightbox-media';
+    } else if (media.tagName === 'OBJECT') {
+      clone = media.cloneNode(true);
+      clone.className = 'lightbox-media lightbox-pdf';
     } else {
       clone = document.createElement('img');
       clone.src = media.currentSrc || media.src;
       clone.alt = media.alt || '';
+      clone.className = 'lightbox-media';
     }
-    clone.className = 'lightbox-media';
 
     overlay.appendChild(clone);
     overlay.appendChild(closeBtn);
@@ -79,6 +97,51 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = 'hidden';
 
     function close() {
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+    }
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', onKeydown);
+  }
+
+  // Reparents the live .cad-viewer element (canvas, renderer, controls and
+  // all) into the lightbox so the model stays fully interactive fullscreen,
+  // then moves it back to its original spot on close. Relies on the
+  // ResizeObserver set up in cad-viewer.js to resize the renderer when the
+  // container's size changes.
+  function openCadLightbox(container) {
+    const { overlay, closeBtn } = buildOverlayShell();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'lightbox-cad-wrap';
+
+    const originalParent = container.parentNode;
+    const originalNext = container.nextSibling;
+
+    wrap.appendChild(container);
+    container.classList.add('lightbox-cad-active');
+
+    overlay.appendChild(wrap);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    function close() {
+      container.classList.remove('lightbox-cad-active');
+      if (originalNext) {
+        originalParent.insertBefore(container, originalNext);
+      } else {
+        originalParent.appendChild(container);
+      }
       overlay.remove();
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
