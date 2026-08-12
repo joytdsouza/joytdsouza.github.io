@@ -44,17 +44,26 @@
   <section class="section" style="border-top:none; padding-bottom: 0;">
     <div class="container">
       <!-- ==========================================================================
-           FILTER BAR
-           Each button's data-filter must match a data-category value used on a
-           .project-entry below ("class", "club", "personal", or "research"). Add
-           more buttons the same way if you add more categories.
+           FILTER DROPDOWN
+           A single "Filter" button toggles a dropdown menu of options. Each
+           .filter-option's data-filter must match a data-category value used
+           on a .project-entry below ("class", "club", "personal", "research").
+           Add more options the same way if you add more categories. The
+           button's visible label updates to whichever option was picked
+           (see js/main.js).
            ========================================================================== -->
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="class">Class Projects</button>
-        <button class="filter-btn" data-filter="club">Club Projects</button>
-        <button class="filter-btn" data-filter="personal">Personal Projects</button>
-        <button class="filter-btn" data-filter="research">Research Projects</button>
+      <div class="filter-dropdown">
+        <button class="filter-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="filter-toggle-label">Filter: All</span>
+          <svg class="filter-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="filter-menu" role="listbox">
+          <button class="filter-option active" type="button" data-filter="all">All</button>
+          <button class="filter-option" type="button" data-filter="class">Class Projects</button>
+          <button class="filter-option" type="button" data-filter="club">Club Projects</button>
+          <button class="filter-option" type="button" data-filter="personal">Personal Projects</button>
+          <button class="filter-option" type="button" data-filter="research">Research Projects</button>
+        </div>
       </div>
     </div>
   </section>
