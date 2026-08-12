@@ -159,21 +159,62 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================================================
-  // Projects page filter — toggles which .project-entry blocks are visible
-  // based on each entry's data-category attribute ("class", "club", "personal").
+  // Projects page filter — a single "Filter" button opens a dropdown menu
+  // of options; picking one filters which .project-entry blocks are shown,
+  // based on each entry's data-category attribute ("class", "club",
+  // "personal", "research").
   // ========================================================================
-  const filterBar = document.querySelector('.filter-bar');
-  if (filterBar) {
-    const buttons = filterBar.querySelectorAll('.filter-btn');
+  const filterDropdown = document.querySelector('.filter-dropdown');
+  if (filterDropdown) {
+    const toggle = filterDropdown.querySelector('.filter-toggle');
+    const toggleLabel = filterDropdown.querySelector('.filter-toggle-label');
+    const menu = filterDropdown.querySelector('.filter-menu');
+    const options = filterDropdown.querySelectorAll('.filter-option');
     const entries = document.querySelectorAll('.project-entry');
     const emptyMsg = document.querySelector('.filter-empty');
 
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        buttons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
+    // Marks whichever entry is currently the first VISIBLE one with
+    // .first-visible (see .project-entry.first-visible in style.css) so the
+    // gap under the filter is identical no matter which filter is active —
+    // instead of relying on DOM order via :first-of-type, which only ever
+    // matched the literal first entry in the markup.
+    function markFirstVisible() {
+      let found = false;
+      entries.forEach((entry) => {
+        const isFirst = !found && !entry.classList.contains('filtered-out');
+        entry.classList.toggle('first-visible', isFirst);
+        if (isFirst) found = true;
+      });
+    }
 
-        const filter = btn.getAttribute('data-filter');
+    function closeMenu() {
+      menu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+      menu.classList.add('open');
+      toggle.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (menu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    options.forEach((option) => {
+      option.addEventListener('click', () => {
+        options.forEach((o) => o.classList.remove('active'));
+        option.classList.add('active');
+        if (toggleLabel) toggleLabel.textContent = 'Filter: ' + option.textContent;
+
+        const filter = option.getAttribute('data-filter');
         let visibleCount = 0;
 
         entries.forEach((entry) => {
@@ -183,8 +224,19 @@ document.addEventListener('DOMContentLoaded', () => {
           if (show) visibleCount++;
         });
 
+        markFirstVisible();
         if (emptyMsg) emptyMsg.classList.toggle('visible', visibleCount === 0);
+        closeMenu();
       });
     });
+
+    document.addEventListener('click', (e) => {
+      if (!filterDropdown.contains(e.target)) closeMenu();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    markFirstVisible();
   }
 });
