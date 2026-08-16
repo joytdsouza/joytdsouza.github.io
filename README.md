@@ -127,15 +127,30 @@ portfolio/
 ### Project detail pages
 - **Captions:** every photo sits in a `.gallery-item` with a `.media-caption`
   paragraph right underneath — edit that text directly.
-- **CAD / STL viewer:** `project-force-sensor.html` has a working example —
-  a `<div class="cad-viewer" data-stl="assets/models/your-part.stl"></div>`.
-  Visitors can rotate (drag), zoom (scroll), and pan (right-click drag, or
-  two-finger drag on trackpad/touch). To use it on another project page, copy
-  that block plus the `<script type="module" src="js/cad-viewer.js"></script>`
-  tag near the bottom of the file, and point `data-stl` at your own exported
-  `.stl` file placed in `assets/models/`. **Note:** this loads three.js from a
-  CDN (unpkg.com), so it needs an internet connection and adds some load time
-  — only include it on pages where an interactive model is actually useful.
+- **CAD models — STL, GLTF/GLB, eDrawings HTML:** `project-force-sensor.html`
+  has a working example. Two different patterns depending on the file type:
+  - **STL or GLTF/GLB** (an exported mesh, no built-in viewer of its own):
+    `<div class="cad-viewer" data-model="assets/models/your-part.stl"></div>`
+    (or point `data-model` at a `.gltf`/`.glb` file instead — same markup,
+    the script picks the right loader from the extension). Visitors can
+    rotate (drag), zoom (scroll), and pan (right-click drag, or two-finger
+    drag on trackpad/touch). To use it on another project page, copy that
+    block plus the `<script type="module" src="js/cad-viewer.js"></script>`
+    tag near the bottom of the file. **Note:** this loads three.js from a
+    CDN (unpkg.com), so it needs an internet connection and adds some load
+    time — only include it on pages where an interactive model is actually
+    useful. (The older `data-stl="..."` attribute still works too.)
+  - **SolidWorks eDrawings** — export via *Publish → eDrawings for the web*
+    to get a self-contained interactive HTML file (it has its own viewer
+    built in, so it doesn't use `cad-viewer.js` at all):
+    ```html
+    <div class="media-frame edrawings-embed">
+      <iframe src="assets/models/your-part.html" loading="lazy"></iframe>
+    </div>
+    ```
+    This gets the same bordered frame, shadow, and click-to-fullscreen
+    behavior as every other gallery item — it just runs eDrawings' own
+    viewer inside the frame.
 - **Embedded PDF:** same pattern as the Resume page, reusable anywhere — see
   the "Calibration Report" section in `project-force-sensor.html` for a
   working example. Good for spec sheets, drawings, or reports. Delete the
