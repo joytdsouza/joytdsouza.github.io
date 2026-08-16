@@ -27,8 +27,19 @@ import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/cont
 import { STLLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/STLLoader.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 
+// Sets the camera's near/far clipping planes relative to the model's own
+// size, then frames it. A fixed near/far (e.g. 0.1–5000) works fine for
+// STL exports using arbitrary "large" units, but breaks for GLTF exports
+// from tools like Onshape, which use meters — a small part can be
+// 0.01–0.03 units across, well inside a fixed 0.1 near plane, so the whole
+// model gets clipped into invisibility. Scaling near/far to the model's
+// bounding radius makes this work at any scale.
 function frameCamera(camera, controls, center, radius) {
-  camera.position.set(center.x + radius * 1.8, center.y + radius * 1.4, center.z + radius * 1.8);
+  const r = radius || 1;
+  camera.near = r / 100;
+  camera.far = r * 100;
+  camera.updateProjectionMatrix();
+  camera.position.set(center.x + r * 1.8, center.y + r * 1.4, center.z + r * 1.8);
   controls.target.copy(center);
   controls.update();
 }
