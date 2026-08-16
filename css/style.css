@@ -76,7 +76,7 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
 }
 
-.accent-bar { height: 6px; width: 100%; background: var(--green-bright); }
+/* accent-bar removed — bright green now lives only in buttons, shadows, and underlines */
 
 /* ==========================================================================
    SHARED: EYEBROW LABELS
@@ -175,8 +175,6 @@ a:focus-visible, button:focus-visible {
   overflow: hidden;
 }
 
-.media-frame.shadow-orange { box-shadow: 7px 7px 0 var(--orange); }
-
 .media-item { margin-bottom: 4px; }
 
 .media-caption {
@@ -216,6 +214,13 @@ a:focus-visible, button:focus-visible {
 }
 .lightbox-media { max-width: 92vw; max-height: 86vh; border: 2px solid var(--offwhite); }
 .lightbox-media.lightbox-pdf { width: 80vw; height: 86vh; max-width: 1000px; background: var(--offwhite); }
+.lightbox-media.lightbox-iframe { width: 85vw; height: 86vh; max-width: 1100px; background: var(--offwhite); }
+
+/* eDrawings "Publish for the web" HTML export — embeds as an iframe inside
+   the same media-frame treatment (border, shadow, fullscreen button) as
+   every other gallery item. See js/cad-viewer.js header comment. */
+.media-frame iframe { display: block; width: 100%; height: 100%; border: none; }
+.gallery-item .edrawings-embed.media-frame { aspect-ratio: 4 / 3; }
 
 .lightbox-cad-wrap { position: relative; width: 90vw; height: 82vh; max-width: 1200px; border: 2px solid var(--offwhite); }
 .cad-viewer.lightbox-cad-active { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; border: none; box-shadow: none; }
@@ -289,10 +294,9 @@ a:focus-visible, button:focus-visible {
 .skill-tags { display: flex; flex-wrap: wrap; gap: 6px 22px; }
 .skill-tag {
   font-family: var(--font-body); font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
-  color: var(--navy); border-bottom: 2px solid var(--green-dark); padding-bottom: 3px;
-  background: none; transition: color var(--transition), border-color var(--transition);
+  color: var(--navy); border-bottom: 2px solid var(--orange); padding-bottom: 3px;
+  background: none;
 }
-.skill-tag:hover { color: var(--green-dark); border-color: var(--orange); }
 
 
 /* ==========================================================================
@@ -313,17 +317,36 @@ a:focus-visible, button:focus-visible {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  filter: blur(3px);
+  transform: scale(1.03); /* hides the soft blurred edge the blur() filter creates */
+}
+
+/* Dark scrim behind the text so it stays readable no matter what the photo
+   looks like — strongest over the text on the left, fading out to the right. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, rgba(20, 26, 36, 0.88) 0%, rgba(20, 26, 36, 0.72) 45%, rgba(20, 26, 36, 0.3) 85%);
 }
 
 .hero-content { position: relative; z-index: 2; max-width: 660px; }
-.hero-content h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); margin-bottom: 10px; color: var(--offwhite); }
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.8rem); margin-bottom: 10px; color: var(--offwhite);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
 
 .hero-title {
   font-family: var(--font-body); color: var(--offwhite); font-size: 14px; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; display: block;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
-.hero-content > p { color: var(--offwhite-70); font-size: 1.1rem; margin-bottom: 32px; max-width: 580px; }
+.hero-content > p {
+  color: var(--offwhite-70); font-size: 1.1rem; margin-bottom: 32px; max-width: 580px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
 .hero-actions { display: flex; gap: 20px; flex-wrap: wrap; }
 
 /* ==========================================================================
@@ -412,17 +435,19 @@ a:focus-visible, button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--navy);
-  color: var(--offwhite);
+  background: var(--offwhite);
+  border: 2px solid var(--navy);
+  color: var(--navy);
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.02em;
   flex-shrink: 0;
-  transition: background var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
+.log-logo img { width: 100%; height: 100%; object-fit: contain; padding: 7px; }
 
-a.log-logo:hover { background: var(--green-dark); }
+a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--green-dark); }
 
 /* the connecting line that fills the space under the logo */
 .log-rail::after {
@@ -578,16 +603,16 @@ a.log-logo:hover { background: var(--green-dark); }
 
 .detail-main-media { margin: 44px 0 0; }
 
-.detail-section { max-width: 740px; margin: 0 0 40px; }
+.detail-section { max-width: none; margin: 0 0 40px; }
 .detail-section-label {
   display: block; font-family: var(--font-body); font-size: 12px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
 }
 .detail-section p { color: var(--navy-soft); font-size: 1.02rem; margin-bottom: 14px; }
 .detail-section p:last-child { margin-bottom: 0; }
 .detail-section a { color: var(--green-dark); font-weight: 600; text-decoration: underline; }
 
-.detail-body { max-width: 740px; color: var(--navy-soft); font-size: 1.02rem; }
+.detail-body { max-width: none; color: var(--navy-soft); font-size: 1.02rem; }
 .detail-body p { margin-bottom: 18px; }
 .detail-body ul { margin: 0 0 18px; padding-left: 22px; }
 .detail-body li { margin-bottom: 8px; }
