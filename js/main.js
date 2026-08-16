@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.media-frame').forEach((frame) => {
     const isCadViewer = frame.classList.contains('cad-viewer');
-    const media = isCadViewer ? null : frame.querySelector('img, video, object');
+    const media = isCadViewer ? null : frame.querySelector('img, video, object, iframe');
     if (!media && !isCadViewer) return;
 
     const btn = document.createElement('button');
@@ -84,6 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (media.tagName === 'OBJECT') {
       clone = media.cloneNode(true);
       clone.className = 'lightbox-media lightbox-pdf';
+    } else if (media.tagName === 'IFRAME') {
+      clone = document.createElement('iframe');
+      clone.src = media.src;
+      clone.setAttribute('allowfullscreen', '');
+      clone.className = 'lightbox-media lightbox-iframe';
     } else {
       clone = document.createElement('img');
       clone.src = media.currentSrc || media.src;
