@@ -109,27 +109,19 @@
         </div>
 
         <div class="gallery-item">
-          <div class="cad-viewer media-frame" data-stl="assets/models/sample-part.stl"></div>
-          <p class="media-caption">Drag to rotate, scroll to zoom, right-click drag (or two-finger drag) to pan. Swap in your own .stl from Onshape/SolidWorks/Fusion.</p>
-        </div>
-        <div class="gallery-item">
-          <div class="doc-embed-wrap media-frame">
-            <object data="assets/resume.pdf#view=FitH" type="application/pdf" class="doc-embed">
-              <div class="doc-fallback">
-                Your browser can't display this PDF.
-                <br><br>
-                <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top:14px;">Download PDF</a>
-              </div>
-            </object>
+          <div class="media-frame">
+            <img src="assets/P2-force-sensor/printed frustums.jpg">
           </div>
-          <p class="media-caption">Caption goes here — e.g. name of the report or drawing.</p>
+            <p class="media-caption">We printed and tested different diameter's of force concentrators to get the most accurate FSR reading.</p>
         </div>
-      </div>
 
-      <div class="detail-placeholder-note" style="margin-top:40px;">
-        This page is a starting template — nothing here has been filled in yet.
-        Swap in real media and replace every placeholder paragraph above with your
-        own Objective / Project Description / Reflection content.
+        <div class="gallery-item">
+          <div class="media-frame">
+            <img src="assets/P2-force-sensor/FSR construction.png">
+          </div>
+            <p class="media-caption">Construction diagram of FSR.</p>
+        </div>        
+
       </div>
 
     </div>
@@ -140,6 +132,16 @@
       <p>Last updated: August 2026</p>
     </div>
   </footer>
+
+  <script src="js/main.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
   <script src="js/main.js"></script>
   <script type="module" src="js/cad-viewer.js"></script>
