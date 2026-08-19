@@ -23,14 +23,10 @@
 // inside the frame rather than three.js.
 // ==========================================================================
 
-//import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-//import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-//import { STLLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/STLLoader.js';
-//import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { STLLoader } from 'three/addons/loaders/STLLoader.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+import { STLLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/STLLoader.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 
 // Sets the camera's near/far clipping planes relative to the model's own
 // size, then frames it. A fixed near/far (e.g. 0.1–5000) works fine for
@@ -82,6 +78,30 @@ function initViewer(container) {
   loadingEl.className = 'cad-loading';
   loadingEl.textContent = 'Loading model…';
   container.appendChild(loadingEl);
+
+  // "?" button + tooltip — shows the rotate/zoom/pan controls on hover
+  // (desktop) or tap (touch), so a project page doesn't need caption text
+  // to explain how to use the model.
+  const helpBtn = document.createElement('button');
+  helpBtn.className = 'cad-help-btn';
+  helpBtn.type = 'button';
+  helpBtn.setAttribute('aria-label', 'Model controls');
+  helpBtn.textContent = '?';
+  container.appendChild(helpBtn);
+
+  const helpTooltip = document.createElement('div');
+  helpTooltip.className = 'cad-help-tooltip';
+  helpTooltip.textContent = 'Drag to rotate · Scroll to zoom · Right-click drag (or two-finger drag) to pan';
+  container.appendChild(helpTooltip);
+
+  helpBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    helpTooltip.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) helpTooltip.classList.remove('open');
+  });
 
   function onLoadError() {
     loadingEl.textContent = "Couldn't load this model — check the data-model path.";
