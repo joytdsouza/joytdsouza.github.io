@@ -127,6 +127,22 @@ portfolio/
 ### Project detail pages
 - **Captions:** every photo sits in a `.gallery-item` with a `.media-caption`
   paragraph right underneath — edit that text directly.
+- **Cropping (cover vs. contain):** gallery thumbnails crop to fill their box
+  by default (`cover`); the main project image shows the whole image instead
+  (`contain`). Override either one per item by adding `data-fit="contain"`
+  or `data-fit="cover"` on that item's `.media-frame`:
+  ```html
+  <div class="media-frame" data-fit="contain">
+    <img src="assets/your-project/tall-photo.jpg">
+  </div>
+  ```
+  Same attribute works on a `.slide` inside a slideshow, so different slides
+  in the same gallery item can crop differently:
+  ```html
+  <div class="slide" data-fit="contain">
+    <img src="assets/your-project/tall-photo.jpg">
+  </div>
+  ```
 - **CAD models — STL, GLTF/GLB, eDrawings HTML:** `project-force-sensor.html`
   has a working example. Two different patterns depending on the file type:
   - **STL or GLTF/GLB** (an exported mesh, no built-in viewer of its own):
@@ -151,6 +167,44 @@ portfolio/
     This gets the same bordered frame, shadow, and click-to-fullscreen
     behavior as every other gallery item — it just runs eDrawings' own
     viewer inside the frame.
+- **Slideshow (multiple media in one gallery item):** wrap several media
+  pieces in one `.gallery-item` instead of one — visitors step through them
+  with prev/next arrows and see a "2 / 4" counter. Mark the frame with both
+  `media-frame` and `slideshow`, and put each piece of media in its own
+  `.slide`:
+  ```html
+  <div class="gallery-item">
+    <div class="media-frame slideshow">
+      <div class="slide active">
+        <img src="assets/your-project/photo1.jpg">
+      </div>
+      <div class="slide">
+        <video controls muted playsinline>
+          <source src="assets/your-project/clip.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="slide">
+        <div class="cad-viewer" data-model="assets/your-project/part.stl"></div>
+      </div>
+    </div>
+    <p class="media-caption">Caption goes here.</p>
+  </div>
+  ```
+  A few rules for what goes inside a `.slide`:
+  - Mark exactly one slide `active` (usually the first) — that's the one
+    shown initially.
+  - For a CAD model, use `<div class="cad-viewer" data-model="...">` — no
+    `media-frame` class on that inner div (the outer slideshow frame already
+    provides the border/shadow/sizing). Same idea for an eDrawings slide:
+    just `<iframe src="assets/your-project/part.html" loading="lazy"></iframe>`
+    directly, no wrapping div.
+  - For a PDF slide, use `<div class="doc-embed-wrap"><object data="..."
+    type="application/pdf" class="doc-embed">...fallback...</object></div>`
+    (same fallback pattern as the Resume page).
+  - The fullscreen button always expands whichever slide is currently active.
+  - If a project page uses a CAD slide, it still needs the same
+    `<script type="module" src="js/cad-viewer.js"></script>` tag as a
+    standalone CAD viewer would.
 - **Embedded PDF:** same pattern as the Resume page, reusable anywhere — see
   the "Calibration Report" section in `project-force-sensor.html` for a
   working example. Good for spec sheets, drawings, or reports. Delete the
