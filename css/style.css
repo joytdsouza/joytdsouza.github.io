@@ -662,11 +662,15 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .detail-header h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin-bottom: 10px; color: var(--offwhite); }
 .detail-meta { color: var(--offwhite-70); font-size: 14.5px; font-weight: 600; margin: 14px 0 0; }
 
-.detail-main-media { margin: 44px 0 0; aspect-ratio: 16 / 9; }
+.detail-main-media { margin: 44px 0 0; }
 .detail-main-media img,
-.detail-main-media video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.detail-main-media video { display: block; width: 100%; height: auto; }
+
+/* Opt-in: force a fixed 16:9 box with cropping, if a project ever wants that
+   look instead of the default (whole image, no blank space). */
+.detail-main-media[data-fit="cover"] { aspect-ratio: 16 / 9; }
 .detail-main-media[data-fit="cover"] img,
-.detail-main-media[data-fit="cover"] video { object-fit: cover; }
+.detail-main-media[data-fit="cover"] video { height: 100%; object-fit: cover; }
 
 .detail-section { max-width: none; margin: 0 0 40px; }
 .detail-section-label {
