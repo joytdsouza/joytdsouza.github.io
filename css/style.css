@@ -208,6 +208,67 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 720px) { .expand-btn { opacity: 1; } }
 
+/* ==========================================================================
+   SLIDESHOW — a .media-frame.slideshow holds multiple .slide children
+   (each one a normal media type: img, video, .cad-viewer, iframe, or a PDF
+   .doc-embed-wrap). Only the .slide.active one is shown; prev/next buttons
+   step through, and a counter badge shows position. The fullscreen button
+   (top-right) always expands whichever slide is currently active. See
+   js/main.js (setupSlideshow) for the behavior and README.md for the exact
+   markup pattern to copy.
+   ========================================================================== */
+.media-frame.slideshow .slide { position: absolute; inset: 0; display: none; }
+.media-frame.slideshow .slide.active { display: block; }
+.media-frame.slideshow .slide img,
+.media-frame.slideshow .slide video { width: 100%; height: 100%; object-fit: cover; }
+.media-frame.slideshow .slide[data-fit="contain"] img,
+.media-frame.slideshow .slide[data-fit="contain"] video { object-fit: contain; }
+.media-frame.slideshow .slide .cad-viewer,
+.media-frame.slideshow .slide .doc-embed-wrap,
+.media-frame.slideshow .slide iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none; box-shadow: none; aspect-ratio: auto;
+}
+
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  color: var(--offwhite);
+  border: 2px solid var(--offwhite);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition);
+}
+.slide-nav svg { width: 15px; height: 15px; }
+.slide-nav:hover { background: var(--orange); }
+.slide-prev { left: 10px; }
+.slide-next { right: 10px; }
+.media-frame.slideshow:hover .slide-nav,
+.media-frame.slideshow:focus-within .slide-nav { opacity: 1; }
+@media (hover: none) { .slide-nav { opacity: 1; } }
+@media (max-width: 720px) { .slide-nav { opacity: 1; } }
+
+.slide-counter {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 5;
+  background: var(--navy);
+  color: var(--offwhite);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+}
+
 .lightbox-overlay {
   position: fixed; inset: 0; background: rgba(27, 36, 50, 0.95);
   display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 56px 24px;
@@ -602,6 +663,14 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .detail-meta { color: var(--offwhite-70); font-size: 14.5px; font-weight: 600; margin: 14px 0 0; }
 
 .detail-main-media { margin: 44px 0 0; }
+.detail-main-media img,
+.detail-main-media video { display: block; width: 100%; height: auto; }
+
+/* Opt-in: force a fixed 16:9 box with cropping, if a project ever wants that
+   look instead of the default (whole image, no blank space). */
+.detail-main-media[data-fit="cover"] { aspect-ratio: 16 / 9; }
+.detail-main-media[data-fit="cover"] img,
+.detail-main-media[data-fit="cover"] video { height: 100%; object-fit: cover; }
 
 .detail-section { max-width: none; margin: 0 0 40px; }
 .detail-section-label {
@@ -622,6 +691,8 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .gallery-item .media-frame { aspect-ratio: 4 / 3; }
 .gallery-item .media-frame img,
 .gallery-item .media-frame video { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item .media-frame[data-fit="contain"] img,
+.gallery-item .media-frame[data-fit="contain"] video { object-fit: contain; }
 .gallery-item .doc-embed-wrap.media-frame { max-width: none; }
 .gallery-item .doc-embed-wrap.media-frame .doc-embed { height: 100%; }
 
@@ -657,6 +728,46 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 
 .cad-caption { margin-top: 12px; font-size: 13.5px; color: var(--navy-soft); }
 .cad-caption strong { color: var(--navy); }
+
+.cad-help-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 5;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  color: var(--offwhite);
+  border: 2px solid var(--offwhite);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.cad-help-btn:hover { background: var(--orange); }
+
+.cad-help-tooltip {
+  position: absolute;
+  bottom: 46px;
+  right: 12px;
+  z-index: 6;
+  max-width: 220px;
+  background: var(--navy);
+  color: var(--offwhite);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.45;
+  padding: 9px 11px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+.cad-help-btn:hover + .cad-help-tooltip,
+.cad-help-tooltip.open { opacity: 1; pointer-events: auto; }
 
 /* ==========================================================================
    PDF EMBED (reusable — used on the Resume page and can be reused elsewhere)
