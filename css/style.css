@@ -445,36 +445,16 @@ a:focus-visible, button:focus-visible {
 /* ==========================================================================
    PAGE HEADER BAND — dark colored intro block used on Projects & Resume
    ========================================================================== */
-.page-header { padding: 56px 0 40px; }
-
-.title-block {
-  position: relative;
-  display: inline-block;
-  min-width: 340px;
-  max-width: 100%;
-  border: 2px solid var(--navy);
-  background: var(--offwhite);
-  padding: 30px 40px 22px;
+.page-header { padding: 60px 0 44px; }
+.page-header .section-head { margin-bottom: 0; max-width: none; }
+.page-header .eyebrow { color: var(--green-dark); border-left-color: var(--orange); }
+.page-header .section-head h2 {
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 1.02;
+  color: var(--navy);
 }
-.title-block .section-head { margin-bottom: 0; max-width: none; }
-.title-block .eyebrow { color: var(--green-dark); border-left-color: var(--orange); }
-.title-block h2 { color: var(--navy); }
-.title-block p { color: var(--navy-soft) !important; max-width: 480px; }
-.title-block-rule { margin-top: 18px; border-top: 2px dashed var(--navy-faint); }
-
-/* Corner registration marks, like crop/tick marks on an engineering drawing */
-.tick { position: absolute; width: 16px; height: 16px; pointer-events: none; }
-.tick::before, .tick::after { content: ""; position: absolute; background: var(--orange); }
-.tick::before { width: 16px; height: 2px; }
-.tick::after { width: 2px; height: 16px; }
-.tick-tl { top: -2px; left: -2px; }
-.tick-tl::before, .tick-tl::after { top: 0; left: 0; }
-.tick-tr { top: -2px; right: -2px; }
-.tick-tr::before, .tick-tr::after { top: 0; right: 0; }
-.tick-bl { bottom: -2px; left: -2px; }
-.tick-bl::before, .tick-bl::after { bottom: 0; left: 0; }
-.tick-br { bottom: -2px; right: -2px; }
-.tick-br::before, .tick-br::after { bottom: 0; right: 0; }
+.page-header p { color: var(--navy-soft) !important; margin-top: 18px; max-width: 560px; font-size: 1.05rem; }
+.page-header-rule { margin-top: 30px; height: 4px; width: 110px; background: var(--orange); }
 
 /* ==========================================================================
    EXPERIENCE LOG — with company logo/initials chip + optional link
