@@ -444,36 +444,54 @@ a:focus-visible, button:focus-visible {
 /* ==========================================================================
    PAGE HEADER BAND — dark colored intro block used on Projects & Resume
    ========================================================================== */
-.page-header { padding: 58px 0 62px; }
+.page-header {
+  position: relative;
+  padding: 36px 0 40px;
+  overflow: hidden;
+  border-top: 2px solid var(--navy-faint);
+  border-bottom: 2px solid var(--navy-faint);
+}
+.page-header::before,
+.page-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 0;
+}
+.page-header::before { left: 0; background: var(--green-dark); }
+.page-header::after { right: 0; background: var(--orange); }
+
 .page-header .container {
+  position: relative;
+  z-index: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px 48px;
+  text-align: center;
 }
 
 .header-stamp { position: relative; display: inline-block; max-width: 100%; }
 .stamp-block { position: absolute; z-index: 0; }
-.stamp-green { top: -14px; left: -14px; width: 64px; height: 64px; background: var(--green-dark); }
-.stamp-orange { bottom: -14px; right: -14px; width: 50px; height: 50px; background: var(--orange); }
+.stamp-orange { top: -16px; left: -16px; width: 62px; height: 62px; background: var(--orange); }
+.stamp-green { bottom: -16px; right: -16px; width: 80px; height: 80px; background: var(--green-dark); }
 .header-stamp-content {
   position: relative;
   z-index: 1;
   background: var(--offwhite);
   border: 2px solid var(--navy);
-  padding: 24px 36px;
+  padding: 20px 34px;
 }
 .header-stamp-content h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--navy); margin: 0; }
 
-.page-header p { color: var(--navy-soft); font-size: 0.98rem; max-width: 380px; margin: 0; text-align: right; }
+.page-header p { color: var(--offwhite); font-size: 1.15rem; max-width: 480px; margin: 16px 0 0; text-align: center; }
 
 @media (max-width: 640px) {
-  .page-header .container { flex-direction: column; align-items: flex-start; gap: 28px; }
-  .page-header p { text-align: left; max-width: none; }
-  .stamp-green { width: 44px; height: 44px; top: -10px; left: -10px; }
-  .stamp-orange { width: 34px; height: 34px; bottom: -10px; right: -10px; }
-  .header-stamp-content { padding: 18px 26px; }
+  .stamp-orange { width: 40px; height: 40px; top: -10px; left: -10px; }
+  .stamp-green { width: 52px; height: 52px; bottom: -10px; right: -10px; }
+  .header-stamp-content { padding: 16px 24px; }
+  .page-header p { font-size: 1rem; }
 }
 
 /* ==========================================================================
