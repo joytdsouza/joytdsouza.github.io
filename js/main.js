@@ -35,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const expandIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
 
   document.querySelectorAll('.media-frame').forEach((frame) => {
+    if (frame.classList.contains('slideshow')) {
+      setupSlideshow(frame);
+      return;
+    }
+
     const isCadViewer = frame.classList.contains('cad-viewer');
     const media = isCadViewer ? null : frame.querySelector('img, video, object, iframe');
     if (!media && !isCadViewer) return;
@@ -56,6 +61,87 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // ========================================================================
+  // Slideshow — a <div class="media-frame slideshow"> holding several
+  // <div class="slide">...</div> children (any mix of img / video /
+  // .cad-viewer / iframe / PDF .doc-embed-wrap). Only one slide is shown at
+  // a time; prev/next buttons step through with wraparound, a counter badge
+  // shows position, and the existing fullscreen button expands whichever
+  // slide is currently active (reusing openLightbox/openCadLightbox exactly
+  // as a single-media frame would). See README.md for the markup pattern.
+  // ========================================================================
+  const prevIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+  function setupSlideshow(frame) {
+    const slides = Array.from(frame.querySelectorAll(':scope > .slide'));
+    if (slides.length === 0) return;
+
+    let index = slides.findIndex((s) => s.classList.contains('active'));
+    if (index === -1) index = 0;
+
+    const counter = document.createElement('div');
+    counter.className = 'slide-counter';
+    frame.appendChild(counter);
+
+    function activeMedia() {
+      const slide = slides[index];
+      const cad = slide.querySelector('.cad-viewer');
+      if (cad) return { isCadViewer: true, el: cad };
+      return { isCadViewer: false, el: slide.querySelector('img, video, object, iframe') };
+    }
+
+    function show(i) {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, si) => s.classList.toggle('active', si === index));
+      counter.textContent = (index + 1) + ' / ' + slides.length;
+    }
+
+    if (slides.length > 1) {
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'slide-nav slide-prev';
+      prevBtn.type = 'button';
+      prevBtn.setAttribute('aria-label', 'Previous');
+      prevBtn.innerHTML = prevIcon;
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'slide-nav slide-next';
+      nextBtn.type = 'button';
+      nextBtn.setAttribute('aria-label', 'Next');
+      nextBtn.innerHTML = nextIcon;
+
+      prevBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(index - 1); });
+      nextBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(index + 1); });
+
+      frame.appendChild(prevBtn);
+      frame.appendChild(nextBtn);
+      frame.setAttribute('tabindex', '0');
+      frame.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') show(index - 1);
+        if (e.key === 'ArrowRight') show(index + 1);
+      });
+    }
+
+    const expandBtn = document.createElement('button');
+    expandBtn.className = 'expand-btn';
+    expandBtn.type = 'button';
+    expandBtn.setAttribute('aria-label', 'View fullscreen');
+    expandBtn.innerHTML = expandIcon;
+    expandBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const current = activeMedia();
+      if (current.isCadViewer) {
+        openCadLightbox(current.el);
+      } else if (current.el) {
+        openLightbox(current.el);
+      }
+    });
+    frame.appendChild(expandBtn);
+
+    show(index);
+  }
 
   function buildOverlayShell() {
     const overlay = document.createElement('div');
@@ -243,5 +329,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     markFirstVisible();
+  }
+
+  // ========================================================================
+  // Skills sync — a project detail page's Skills come from projects.html,
+  // not its own markup. Each project card on projects.html has a "Learn
+  // More" link pointing at this exact detail page; we fetch projects.html,
+  // find the card whose link matches the current filename, and copy that
+  // card's .skill-tags into this page's .skill-tags. Edit skills in exactly
+  // one place — projects.html — and every detail page stays in sync
+  // automatically. If the fetch fails (e.g. opening the file directly
+  // instead of through a server) the page's own existing skill tags stay as
+  // a fallback, so nothing breaks.
+  // ========================================================================
+  const localSkillTags = document.querySelector('.skill-tags-wrap .skill-tags');
+  const isDetailPage = document.querySelector('.detail-header') && localSkillTags;
+  if (isDetailPage) {
+    const currentFile = window.location.pathname.split('/').pop();
+    fetch('projects.html')
+      .then((res) => res.text())
+      .then((html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const match = Array.from(doc.querySelectorAll('.project-entry')).find((entry) => {
+          const link = entry.querySelector('a[href$=".html"]');
+          return link && link.getAttribute('href') === currentFile;
+        });
+        const sourceTags = match && match.querySelector('.skill-tags');
+        if (sourceTags) localSkillTags.innerHTML = sourceTags.innerHTML;
+      })
+      .catch(() => { /* keep existing tags as fallback */ });
   }
 });
