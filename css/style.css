@@ -104,8 +104,7 @@ a:focus-visible, button:focus-visible {
   top: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: var(--offwhite-70);
-  backdrop-filter: blur(6px);
+  background: #1B2432;
   border-bottom: 2px solid var(--navy);
 }
 
@@ -116,7 +115,7 @@ a:focus-visible, button:focus-visible {
   justify-content: space-between;
 }
 
-.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--navy); }
+.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--offwhite); }
 
 .nav-links { display: flex; gap: 4px; list-style: none; }
 
@@ -126,17 +125,17 @@ a:focus-visible, button:focus-visible {
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--navy-soft);
+  color: var(--offwhite-70);
   padding: 8px 14px;
   border-bottom: 3px solid transparent;
   transition: color var(--transition), border-color var(--transition);
 }
 
-.nav-links a:hover { color: var(--navy); }
-.nav-links a.active { color: var(--green-dark); border-bottom-color: var(--orange); }
+.nav-links a:hover { color: var(--offwhite); }
+.nav-links a.active { color: var(--green-bright); border-bottom-color: var(--orange); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-.nav-toggle span { width: 22px; height: 2px; background: var(--navy); display: block; }
+.nav-toggle span { width: 22px; height: 2px; background: var(--offwhite); display: block; }
 
 /* ==========================================================================
    BUTTONS
@@ -445,19 +444,36 @@ a:focus-visible, button:focus-visible {
 /* ==========================================================================
    PAGE HEADER BAND — dark colored intro block used on Projects & Resume
    ========================================================================== */
-.page-header { padding: 26px 0; background: var(--navy-wash); border-bottom: 2px solid var(--navy-faint); }
+.page-header { padding: 58px 0 62px; }
 .page-header .container {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px 48px;
+  gap: 24px 48px;
 }
-.page-header h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--navy); margin: 0; }
-.page-header p { color: var(--navy-soft); font-size: 0.98rem; max-width: 420px; margin: 0; text-align: right; }
+
+.header-stamp { position: relative; display: inline-block; max-width: 100%; }
+.stamp-block { position: absolute; z-index: 0; }
+.stamp-green { top: -14px; left: -14px; width: 64px; height: 64px; background: var(--green-dark); }
+.stamp-orange { bottom: -14px; right: -14px; width: 50px; height: 50px; background: var(--orange); }
+.header-stamp-content {
+  position: relative;
+  z-index: 1;
+  background: var(--offwhite);
+  border: 2px solid var(--navy);
+  padding: 24px 36px;
+}
+.header-stamp-content h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--navy); margin: 0; }
+
+.page-header p { color: var(--navy-soft); font-size: 0.98rem; max-width: 380px; margin: 0; text-align: right; }
+
 @media (max-width: 640px) {
-  .page-header .container { flex-direction: column; align-items: flex-start; }
+  .page-header .container { flex-direction: column; align-items: flex-start; gap: 28px; }
   .page-header p { text-align: left; max-width: none; }
+  .stamp-green { width: 44px; height: 44px; top: -10px; left: -10px; }
+  .stamp-orange { width: 34px; height: 34px; bottom: -10px; right: -10px; }
+  .header-stamp-content { padding: 18px 26px; }
 }
 
 /* ==========================================================================
@@ -657,15 +673,17 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .detail-header h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin-bottom: 10px; color: var(--offwhite); }
 .detail-meta { color: var(--offwhite-70); font-size: 14.5px; font-weight: 600; margin: 14px 0 0; }
 
-.detail-main-media { margin: 44px 0 0; }
+.detail-main-media { margin: 44px 0 0; display: inline-block; max-width: 100%; }
 .detail-main-media img,
-.detail-main-media video { display: block; width: 100%; height: auto; }
+.detail-main-media video { display: block; max-width: 100%; height: auto; }
 
 /* Opt-in: force a fixed 16:9 box with cropping, if a project ever wants that
    look instead of the default (whole image, no blank space). */
-.detail-main-media[data-fit="cover"] { aspect-ratio: 16 / 9; }
+/* Opt-in: force the main image into a fixed-width, full-bleed box instead
+   of its natural size — for a project that specifically wants that look. */
+.detail-main-media[data-fit="cover"] { display: block; aspect-ratio: 16 / 9; }
 .detail-main-media[data-fit="cover"] img,
-.detail-main-media[data-fit="cover"] video { height: 100%; object-fit: cover; }
+.detail-main-media[data-fit="cover"] video { width: 100%; height: 100%; object-fit: cover; }
 
 .detail-section { max-width: none; margin: 0 0 40px; }
 .detail-section-label {
@@ -806,8 +824,9 @@ footer p { font-family: var(--font-body); font-size: 13px; font-weight: 600; col
   }
   .nav-links.open { max-height: 260px; }
   .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 16px 24px; border-bottom: none; border-left: 4px solid transparent; }
-  .nav-links a.active { background: var(--green-wash); border-left-color: var(--orange); }
+  .nav-links a { display: block; padding: 16px 24px; border-bottom: none; border-left: 4px solid transparent; color: var(--navy-soft); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--green-dark); background: var(--green-wash); border-left-color: var(--orange); }
   .nav-toggle { display: flex; }
 
   .hero { padding: 48px 0 56px; }
