@@ -104,7 +104,7 @@ a:focus-visible, button:focus-visible {
   top: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: #1B2432;
+  background: var(--offwhite);
   border-bottom: 2px solid var(--navy);
 }
 
@@ -115,9 +115,10 @@ a:focus-visible, button:focus-visible {
   justify-content: space-between;
 }
 
-.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--offwhite); }
+.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--navy); }
+.nav-logo span { color: var(--navy); }
 
-.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links { display: flex; gap: 6px; list-style: none; }
 
 .nav-links a {
   font-family: var(--font-body);
@@ -125,17 +126,16 @@ a:focus-visible, button:focus-visible {
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--offwhite-70);
+  color: var(--navy-soft);
   padding: 8px 14px;
-  border-bottom: 3px solid transparent;
-  transition: color var(--transition), border-color var(--transition);
+  transition: color var(--transition), background var(--transition);
 }
 
-.nav-links a:hover { color: var(--offwhite); }
-.nav-links a.active { color: var(--green-bright); border-bottom-color: var(--orange); }
+.nav-links a:hover { color: var(--navy); background: var(--navy-wash); }
+.nav-links a.active { color: var(--offwhite); background: var(--green-dark); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-.nav-toggle span { width: 22px; height: 2px; background: var(--offwhite); display: block; }
+.nav-toggle span { width: 22px; height: 2px; background: var(--navy); display: block; }
 
 /* ==========================================================================
    BUTTONS
@@ -442,6 +442,15 @@ a:focus-visible, button:focus-visible {
 .section-tint-green { background: var(--green-wash); }
 
 /* ==========================================================================
+   ABOUT PAGE — tighter vertical rhythm (scoped via body.page-about so other
+   pages keep their normal section spacing)
+   ========================================================================== */
+.page-about .hero { padding: 56px 0 60px; }
+.page-about .section { padding: 56px 0; }
+.page-about .section-head { margin-bottom: 28px; }
+.page-about .contact-block { padding: 44px 0 52px; }
+
+/* ==========================================================================
    PAGE HEADER BAND — dark colored intro block used on Projects & Resume
    ========================================================================== */
 .page-header {
@@ -691,7 +700,7 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .detail-header h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin-bottom: 10px; color: var(--offwhite); }
 .detail-meta { color: var(--offwhite-70); font-size: 14.5px; font-weight: 600; margin: 14px 0 0; }
 
-.detail-main-media { margin: 44px 0 0; display: inline-block; max-width: 100%; }
+.detail-main-media { margin: 44px auto 0; display: block; width: fit-content; max-width: 100%; }
 .detail-main-media img,
 .detail-main-media video { display: block; max-width: 100%; height: auto; }
 
@@ -699,7 +708,7 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
    look instead of the default (whole image, no blank space). */
 /* Opt-in: force the main image into a fixed-width, full-bleed box instead
    of its natural size — for a project that specifically wants that look. */
-.detail-main-media[data-fit="cover"] { display: block; aspect-ratio: 16 / 9; }
+.detail-main-media[data-fit="cover"] { display: block; width: 100%; aspect-ratio: 16 / 9; }
 .detail-main-media[data-fit="cover"] img,
 .detail-main-media[data-fit="cover"] video { width: 100%; height: 100%; object-fit: cover; }
 
@@ -842,9 +851,9 @@ footer p { font-family: var(--font-body); font-size: 13px; font-weight: 600; col
   }
   .nav-links.open { max-height: 260px; }
   .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 16px 24px; border-bottom: none; border-left: 4px solid transparent; color: var(--navy-soft); }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-links a.active { color: var(--green-dark); background: var(--green-wash); border-left-color: var(--orange); }
+  .nav-links a { display: block; padding: 16px 24px; color: var(--navy-soft); }
+  .nav-links a:hover { color: var(--navy); background: var(--navy-wash); }
+  .nav-links a.active { color: var(--offwhite); background: var(--green-dark); }
   .nav-toggle { display: flex; }
 
   .hero { padding: 48px 0 56px; }
