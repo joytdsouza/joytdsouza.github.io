@@ -27,7 +27,9 @@ Designed to be hosted for free on GitHub Pages.
   (see `js/cad-viewer.js`, which now uses a `ResizeObserver` so the model
   keeps working when reparented into the lightbox) and PDFs.
 - **Skills:** now `.skill-tags` / `.skill-tag` — one consistent color instead
-  of the old alternating `.tag` / `.tag-orange`.
+  of the old alternating `.tag` / `.tag-orange`. A detail page's Skills come
+  from `projects.html`, not its own markup — see the "Category filter"
+  section below for how to edit them.
 - Every project page currently has **placeholder text and blank placeholder
   files** (empty `.svg`/`.stl`/`.pdf`) — nothing has been filled in from
   content elsewhere. Replace the placeholders and write your own
@@ -120,6 +122,16 @@ portfolio/
 - **Add or edit a project card:** copy an entire `<div class="project-entry">...</div>`
   block and edit the content. Image stays on the left, text on the right, for
   every entry.
+- **Skills:** edit a project's `.skill-tags` here, on `projects.html` — never
+  on the detail page itself. When a detail page loads, it fetches
+  `projects.html`, finds the card whose "Learn More" link points at itself,
+  and copies that card's skill tags in automatically (see `js/main.js`). This
+  means the `.skill-tags` block inside each `project-*.html` file is really
+  just a fallback for offline viewing (opening the file directly instead of
+  through a server, where `fetch` can't run) — the live site always shows
+  whatever is on `projects.html`. If you add a new project, keep its
+  "Learn More" `href` on `projects.html` exactly matching the detail page's
+  filename, or the sync won't find a match.
 - **Add a project's detail page:** copy one of the existing `project-*.html`
   files, rename it, edit the content, then point a new card's "Learn More"
   button at that filename.

@@ -104,8 +104,7 @@ a:focus-visible, button:focus-visible {
   top: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: var(--offwhite-70);
-  backdrop-filter: blur(6px);
+  background: #1B2432;
   border-bottom: 2px solid var(--navy);
 }
 
@@ -116,8 +115,7 @@ a:focus-visible, button:focus-visible {
   justify-content: space-between;
 }
 
-.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--navy); }
-.nav-logo span { color: var(--green-dark); }
+.nav-logo { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--offwhite); }
 
 .nav-links { display: flex; gap: 4px; list-style: none; }
 
@@ -127,17 +125,17 @@ a:focus-visible, button:focus-visible {
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--navy-soft);
+  color: var(--offwhite-70);
   padding: 8px 14px;
   border-bottom: 3px solid transparent;
   transition: color var(--transition), border-color var(--transition);
 }
 
-.nav-links a:hover { color: var(--navy); }
-.nav-links a.active { color: var(--green-dark); border-bottom-color: var(--orange); }
+.nav-links a:hover { color: var(--offwhite); }
+.nav-links a.active { color: var(--green-bright); border-bottom-color: var(--orange); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-.nav-toggle span { width: 22px; height: 2px; background: var(--navy); display: block; }
+.nav-toggle span { width: 22px; height: 2px; background: var(--offwhite); display: block; }
 
 /* ==========================================================================
    BUTTONS
@@ -416,31 +414,21 @@ a:focus-visible, button:focus-visible {
 .contact-block { background: var(--navy); border-top: 2px solid var(--navy); padding: 60px 0 68px; }
 .contact-block .eyebrow { color: var(--green-bright); border-left-color: var(--orange); }
 .contact-block h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 26px; color: var(--offwhite); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--offwhite); }
+.contact-grid { display: flex; flex-wrap: wrap; gap: 36px; }
 
 .contact-card {
-  position: relative; display: flex; align-items: center; gap: 16px;
-  padding: 24px 26px 24px 32px; border-right: 2px solid var(--offwhite);
-  background: var(--offwhite); transition: background var(--transition);
+  display: flex; align-items: center; gap: 12px;
 }
-.contact-card:last-child { border-right: none; }
-.contact-card:hover { background: var(--green-wash); }
-.contact-stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: var(--orange); }
-.contact-card:nth-child(2) .contact-stripe { background: var(--green-dark); }
+.contact-stripe { display: none; }
 
 .contact-icon {
-  width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  background: var(--navy); color: var(--offwhite);
+  width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--offwhite); color: var(--navy);
 }
-.contact-icon svg { width: 20px; height: 20px; }
-.contact-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy-soft); margin-bottom: 3px; }
-.contact-value { font-size: 15.5px; font-weight: 600; color: var(--navy); word-break: break-word; }
-
-@media (max-width: 640px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-card { border-right: none; border-bottom: 2px solid var(--offwhite); }
-  .contact-card:last-child { border-bottom: none; }
-}
+.contact-icon svg { width: 16px; height: 16px; }
+.contact-label { display: none; }
+.contact-value { font-size: 15.5px; font-weight: 600; color: var(--offwhite); word-break: break-word; transition: color var(--transition); }
+.contact-card:hover .contact-value { color: var(--green-bright); }
 
 /* ==========================================================================
    SECTIONS
@@ -457,13 +445,54 @@ a:focus-visible, button:focus-visible {
    PAGE HEADER BAND — dark colored intro block used on Projects & Resume
    ========================================================================== */
 .page-header {
-  background: var(--navy);
-  border-bottom: 2px solid var(--navy);
-  padding: 60px 0 40px;
+  position: relative;
+  padding: 36px 0 40px;
+  overflow: hidden;
+  border-top: 2px solid var(--navy-faint);
+  border-bottom: 2px solid var(--navy-faint);
 }
-.page-header .eyebrow { color: var(--green-bright); border-left-color: var(--orange); }
-.page-header h2 { color: var(--offwhite); }
-.page-header p { color: var(--offwhite-70) !important; }
+.page-header::before,
+.page-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 0;
+}
+.page-header::before { left: 0; background: var(--green-dark); }
+.page-header::after { right: 0; background: var(--orange); }
+
+.page-header .container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.header-stamp { position: relative; display: inline-block; max-width: 100%; }
+.stamp-block { position: absolute; z-index: 0; }
+.stamp-orange { top: -16px; left: -16px; width: 62px; height: 62px; background: var(--orange); }
+.stamp-green { bottom: -16px; right: -16px; width: 80px; height: 80px; background: var(--green-dark); }
+.header-stamp-content {
+  position: relative;
+  z-index: 1;
+  background: var(--offwhite);
+  border: 2px solid var(--navy);
+  padding: 20px 34px;
+}
+.header-stamp-content h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--navy); margin: 0; }
+
+.page-header p { color: var(--offwhite); font-size: 1.15rem; max-width: 480px; margin: 16px 0 0; text-align: center; }
+
+@media (max-width: 640px) {
+  .stamp-orange { width: 40px; height: 40px; top: -10px; left: -10px; }
+  .stamp-green { width: 52px; height: 52px; bottom: -10px; right: -10px; }
+  .header-stamp-content { padding: 16px 24px; }
+  .page-header p { font-size: 1rem; }
+}
 
 /* ==========================================================================
    EXPERIENCE LOG — with company logo/initials chip + optional link
@@ -662,15 +691,17 @@ a.log-logo:hover { border-color: var(--green-dark); box-shadow: 3px 3px 0 var(--
 .detail-header h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin-bottom: 10px; color: var(--offwhite); }
 .detail-meta { color: var(--offwhite-70); font-size: 14.5px; font-weight: 600; margin: 14px 0 0; }
 
-.detail-main-media { margin: 44px 0 0; }
+.detail-main-media { margin: 44px 0 0; display: inline-block; max-width: 100%; }
 .detail-main-media img,
-.detail-main-media video { display: block; width: 100%; height: auto; }
+.detail-main-media video { display: block; max-width: 100%; height: auto; }
 
 /* Opt-in: force a fixed 16:9 box with cropping, if a project ever wants that
    look instead of the default (whole image, no blank space). */
-.detail-main-media[data-fit="cover"] { aspect-ratio: 16 / 9; }
+/* Opt-in: force the main image into a fixed-width, full-bleed box instead
+   of its natural size — for a project that specifically wants that look. */
+.detail-main-media[data-fit="cover"] { display: block; aspect-ratio: 16 / 9; }
 .detail-main-media[data-fit="cover"] img,
-.detail-main-media[data-fit="cover"] video { height: 100%; object-fit: cover; }
+.detail-main-media[data-fit="cover"] video { width: 100%; height: 100%; object-fit: cover; }
 
 .detail-section { max-width: none; margin: 0 0 40px; }
 .detail-section-label {
@@ -811,8 +842,9 @@ footer p { font-family: var(--font-body); font-size: 13px; font-weight: 600; col
   }
   .nav-links.open { max-height: 260px; }
   .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 16px 24px; border-bottom: none; border-left: 4px solid transparent; }
-  .nav-links a.active { background: var(--green-wash); border-left-color: var(--orange); }
+  .nav-links a { display: block; padding: 16px 24px; border-bottom: none; border-left: 4px solid transparent; color: var(--navy-soft); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--green-dark); background: var(--green-wash); border-left-color: var(--orange); }
   .nav-toggle { display: flex; }
 
   .hero { padding: 48px 0 56px; }
