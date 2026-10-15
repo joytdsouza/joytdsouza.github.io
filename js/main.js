@@ -25,6 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ========================================================================
+  // Shared last-updated date — edit the date in index.html only. Every other
+  // page copies that value at load time and keeps its local text as a
+  // fallback when the site is opened without a web server.
+  // ========================================================================
+  const localUpdatedDate = document.querySelector('[data-last-updated]');
+  if (localUpdatedDate && current !== 'index.html') {
+    fetch('index.html')
+      .then((res) => res.text())
+      .then((html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const sourceDate = doc.querySelector('[data-last-updated]');
+        if (sourceDate) localUpdatedDate.textContent = sourceDate.textContent;
+      })
+      .catch(() => { /* keep the local fallback when fetch is unavailable */ });
+  }
+
+  // ========================================================================
   // Fullscreen media viewer
   // Any element with class="media-frame" wrapping an <img>, <video>, or
   // <object> (PDF embed) gets a hover-reveal expand button automatically —
@@ -33,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // lightbox live, so you can keep rotating/zooming/panning it fullscreen.
   // ========================================================================
   const expandIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+
+  const prevIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
 
   document.querySelectorAll('.media-frame').forEach((frame) => {
     if (frame.classList.contains('slideshow')) {
@@ -71,9 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // slide is currently active (reusing openLightbox/openCadLightbox exactly
   // as a single-media frame would). See README.md for the markup pattern.
   // ========================================================================
-  const prevIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
-  const nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
-
   function setupSlideshow(frame) {
     const slides = Array.from(frame.querySelectorAll(':scope > .slide'));
     if (slides.length === 0) return;
@@ -132,7 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       e.stopPropagation();
       const current = activeMedia();
-      if (current.isCadViewer) {
+      if (slides.length > 1 && !current.isCadViewer) {
+        openSlideshowLightbox(slides, index);
+      } else if (current.isCadViewer) {
         openCadLightbox(current.el);
       } else if (current.el) {
         openLightbox(current.el);
@@ -202,6 +221,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', onKeydown);
+  }
+
+  function openSlideshowLightbox(slides, startIndex) {
+    const { overlay, closeBtn } = buildOverlayShell();
+    const mediaSlides = slides.map((slide) => slide.querySelector('img, video, object, iframe'));
+    let index = startIndex;
+
+    const counter = document.createElement('div');
+    counter.className = 'slide-counter';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'slide-nav slide-prev';
+    prevBtn.type = 'button';
+    prevBtn.setAttribute('aria-label', 'Previous slideshow item');
+    prevBtn.innerHTML = prevIcon;
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'slide-nav slide-next';
+    nextBtn.type = 'button';
+    nextBtn.setAttribute('aria-label', 'Next slideshow item');
+    nextBtn.innerHTML = nextIcon;
+
+    function render() {
+      const media = mediaSlides[index];
+      const clone = media.cloneNode(true);
+      clone.className = 'lightbox-media' + (media.tagName === 'OBJECT' ? ' lightbox-pdf' : '');
+      if (media.tagName === 'VIDEO') {
+        clone.controls = true;
+        clone.autoplay = true;
+      }
+      const previous = overlay.querySelector('.lightbox-media');
+      if (previous) previous.remove();
+      overlay.insertBefore(clone, closeBtn);
+      counter.textContent = (index + 1) + ' / ' + mediaSlides.length;
+    }
+
+    function show(i) {
+      index = (i + mediaSlides.length) % mediaSlides.length;
+      render();
+    }
+
+    function close() {
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+    }
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    }
+
+    function onWheel(e) {
+      e.preventDefault();
+      show(index + (e.deltaY > 0 ? 1 : -1));
+    }
+
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(index - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(index + 1); });
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    overlay.addEventListener('wheel', onWheel, { passive: false });
+
+    overlay.appendChild(prevBtn);
+    overlay.appendChild(nextBtn);
+    overlay.appendChild(counter);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKeydown);
+    render();
   }
 
   // Reparents the live .cad-viewer element (canvas, renderer, controls and

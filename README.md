@@ -232,9 +232,10 @@ portfolio/
 - **Fullscreen viewing:** any image or video wrapped in
   `<div class="media-frame">...</div>` automatically gets a hover-to-reveal
   expand button (always visible on mobile) that opens it full-screen in a
-  lightbox. No extra setup needed.
-- **"Last updated" date:** each page's footer reads `Last updated: August 2026`
-  — update this text by hand whenever you make a meaningful content edit.
+  lightbox. Slideshows also support fullscreen Previous/Next buttons, arrow
+  keys, and mouse-wheel navigation. No extra setup needed.
+- **"Last updated" date:** edit the date in `index.html` once; the other pages
+  copy it automatically when they load.
 - **Colors:** every color is defined once at the top of `css/style.css` inside
   `:root { ... }`.
 - **Fonts:** headings use Spectral, set via `--font-display` in `css/style.css`
